@@ -1,0 +1,65 @@
+import SectionWrapper from '../layout/SectionWrapper'
+import SectionHeading from '../ui/SectionHeading'
+import SkeletonLoader from '../ui/SkeletonLoader'
+import FearGreedGauge from './FearGreedGauge'
+import MarketStatCard from './MarketStatCard'
+import GainersLosers from './GainersLosers'
+import { formatCurrency, formatLargeNumber } from '../../utils/formatters'
+import { useCurrency } from '../../contexts/CurrencyContext'
+import { useLanguage } from '../../contexts/LanguageContext'
+import { t } from '../../i18n/translations'
+
+export default function MarketPulseSection({ globalData, globalLoading, fearGreed, fearGreedLoading, coins }) {
+  const { currency } = useCurrency()
+  const { lang } = useLanguage()
+
+  return (
+    <SectionWrapper id="market">
+      <SectionHeading
+        title={t('marketPulseTitle', lang)}
+        subtitle={t('marketPulseSubtitle', lang)}
+      />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12">
+        {/* Fear & Greed */}
+        <div className="panel flex items-center justify-center">
+          {fearGreedLoading ? (
+            <SkeletonLoader lines={3} />
+          ) : (
+            <FearGreedGauge
+              value={fearGreed?.value ?? 50}
+              classification={fearGreed?.classification ?? 'Neutral'}
+            />
+          )}
+        </div>
+
+        {/* Stats */}
+        {globalLoading ? (
+          Array.from({ length: 3 }, (_, i) => (
+            <div key={i} className="panel">
+              <SkeletonLoader lines={2} />
+            </div>
+          ))
+        ) : (
+          <>
+            <MarketStatCard
+              label={t('marketTotalCap', lang)}
+              value={formatCurrency(globalData?.total_market_cap?.[currency], 2, currency)}
+              change={globalData?.market_cap_change_percentage_24h_usd}
+            />
+            <MarketStatCard
+              label={t('marketBtcDominance', lang)}
+              value={`${globalData?.market_cap_percentage?.btc?.toFixed(1) ?? '—'}%`}
+            />
+            <MarketStatCard
+              label={t('marketVolume24h', lang)}
+              value={formatCurrency(globalData?.total_volume?.[currency], 2, currency)}
+            />
+          </>
+        )}
+      </div>
+
+      <GainersLosers coins={coins} />
+    </SectionWrapper>
+  )
+}

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.coingecko.com)",
+      "WebSearch",
+      "WebFetch(domain:dev.to)",
+      "WebFetch(domain:motion.dev)",
+      "WebFetch(domain:alternative.me)",
+      "WebFetch(domain:api.alternative.me)",
+      "WebFetch(domain:www.npmjs.com)",
+      "Bash(grep:*)"
+    ]
+  }
+}
