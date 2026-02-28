@@ -13,7 +13,7 @@ export default function NewsSection() {
       <div className="flex items-center justify-between mb-10">
         <div>
           <h2
-            className="font-heading font-bold text-glow-cyan text-neon-cyan mb-2"
+            className="font-heading font-bold text-glow-purple text-neon-purple mb-2"
             style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}
           >
             {t('newsTitle1', lang)} {t('newsTitle2', lang)}

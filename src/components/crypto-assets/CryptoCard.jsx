@@ -15,6 +15,8 @@ export default function CryptoCard({ coin }) {
   const meta = cryptoMeta[coin.id] || {}
   const sparklineData = coin.sparkline_in_7d?.price || []
   const is7dPositive = (coin.price_change_percentage_7d_in_currency ?? 0) >= 0
+  const colors = meta.brandColors || ['#00f0ff', '#00f0ff']
+  const accentColor = colors[1]
 
   return (
     <motion.div
@@ -24,34 +26,32 @@ export default function CryptoCard({ coin }) {
       transition={{ duration: 0.3 }}
       layout
     >
-      <GlassCard variant="cyan" className="flex flex-col gap-5 h-full">
+      <GlassCard brandColors={colors} className="flex flex-col gap-3 h-full !p-4 !min-h-0 !rounded-2xl">
         {/* Header */}
-        <div className="flex items-start justify-between">
-          <div className="flex items-center gap-3">
-            <img src={coin.image} alt={coin.name} className="w-11 h-11 rounded-full ring-1 ring-white/10" />
-            <div>
-              <div className="flex items-center gap-3">
-                <h3 className="font-heading text-base md:text-lg font-semibold text-text-primary tracking-tight">{coin.name}</h3>
-                <span className="text-text-secondary/80 text-sm font-medium">{coin.symbol?.toUpperCase()}</span>
-              </div>
-              <div className="flex items-center gap-2 mt-1">
-                <span className="text-text-secondary text-xs">{formatMarketCapRank(coin.market_cap_rank)}</span>
-                <RiskBadge risk={meta.risk} />
-              </div>
+        <div className="flex items-center gap-2.5">
+          <img src={coin.image} alt={coin.name} className="w-9 h-9 rounded-full ring-1 ring-white/10 flex-shrink-0" />
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-1.5">
+              <h3 className="font-heading text-sm font-semibold text-text-primary tracking-tight truncate">{coin.name}</h3>
+              <span className="text-text-secondary/80 text-xs font-medium flex-shrink-0">{coin.symbol?.toUpperCase()}</span>
             </div>
-          </div>
-          <div className="text-right">
-            <div className="font-heading text-2xl md:text-3xl font-bold text-neon-cyan">{formatCurrency(coin.current_price, 2, currency)}</div>
+            <div className="flex items-center gap-1.5 mt-0.5">
+              <span className="text-text-secondary text-[10px]">{formatMarketCapRank(coin.market_cap_rank)}</span>
+              <RiskBadge risk={meta.risk} />
+            </div>
           </div>
         </div>
 
+        {/* Price */}
+        <div className="font-heading text-lg md:text-xl font-bold" style={{ color: accentColor }}>{formatCurrency(coin.current_price, 2, currency)}</div>
+
         {/* Sparkline */}
-        <div className="flex items-center justify-center py-1">
-          <SparklineChart data={sparklineData} positive={is7dPositive} />
+        <div className="flex items-center justify-center">
+          <SparklineChart data={sparklineData} positive={is7dPositive} height={40} />
         </div>
 
         {/* Price changes */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-2">
           <PriceChange value={coin.price_change_percentage_24h_in_currency} label={t('priceToday', lang)} />
           <PriceChange value={coin.price_change_percentage_7d_in_currency} label={t('price7d', lang)} />
           <PriceChange value={coin.price_change_percentage_30d_in_currency} label={t('price30d', lang)} />
@@ -59,7 +59,7 @@ export default function CryptoCard({ coin }) {
 
         {/* Description */}
         {meta.description && (
-          <p className="text-text-secondary text-sm md:text-base leading-loose border-t border-white/5 pt-4 mt-auto">
+          <p className="text-text-secondary text-xs leading-relaxed border-t border-white/5 pt-3 mt-auto line-clamp-3">
             {l(meta.description, lang)}
           </p>
         )}

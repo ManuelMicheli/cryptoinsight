@@ -4,27 +4,27 @@ import HeroScrollIndicator from './HeroScrollIndicator'
 
 const THEMES = {
   crypto: {
-    colors: ['#0e1a2e', '#1a0d2e', '#8b5cf6', '#00f0ff'],
-    titleColor: 'text-neon-purple',
-    glowClass: 'text-glow-purple',
+    colors: ['#0a1a2a', '#0e2a3a', '#00f0ff', '#00c8ff'],
+    titleColor: 'text-neon-cyan',
+    glowClass: 'text-glow-cyan',
     accentColor: 'text-glow-cyan text-neon-cyan',
   },
   market: {
-    colors: ['#0a1a0a', '#0e2a1a', '#00ff88', '#00f0ff'],
+    colors: ['#0a1a0a', '#0e2a1a', '#00ff88', '#00d870'],
     titleColor: 'text-neon-green',
-    glowClass: '',
-    accentColor: 'text-glow-cyan text-neon-cyan',
+    glowClass: 'text-glow-green',
+    accentColor: 'text-glow-green text-neon-green',
   },
   events: {
-    colors: ['#1a0a1e', '#2e0d3a', '#8b5cf6', '#f59e0b'],
-    titleColor: 'text-neon-purple',
-    glowClass: 'text-glow-purple',
-    accentColor: 'text-neon-amber',
+    colors: ['#1a1400', '#2e2000', '#f59e0b', '#e8890a'],
+    titleColor: 'text-neon-amber',
+    glowClass: 'text-glow-amber',
+    accentColor: 'text-glow-amber text-neon-amber',
   },
   news: {
-    colors: ['#0e2a3a', '#1a0d2e', '#00f0ff', '#8b5cf6'],
-    titleColor: 'text-neon-cyan',
-    glowClass: 'text-glow-cyan',
+    colors: ['#1a0a2e', '#2e0d3a', '#8b5cf6', '#a78bfa'],
+    titleColor: 'text-neon-purple',
+    glowClass: 'text-glow-purple',
     accentColor: 'text-glow-purple text-neon-purple',
   },
 }
@@ -36,7 +36,7 @@ export default function PageHero({ theme, title, highlightedWord, subtitle, chil
   const y = useTransform(scrollY, [0, 300], [0, 80])
 
   return (
-    <section className="relative min-h-[75vh] flex flex-col justify-center overflow-hidden">
+    <section className="relative min-h-[40vh] flex flex-col justify-center overflow-hidden">
       <MeshGradient
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
         colors={config.colors}
@@ -59,7 +59,7 @@ export default function PageHero({ theme, title, highlightedWord, subtitle, chil
       </div>
 
       <motion.div
-        className="relative z-10 flex-1 flex flex-col items-center justify-center pt-24 pb-16 max-w-[1280px] mx-auto w-full px-6 md:px-12 lg:px-16"
+        className="relative z-10 flex-1 flex flex-col items-center justify-center pt-20 pb-10 max-w-[1280px] mx-auto w-full px-6 md:px-12 lg:px-16"
         style={{ opacity, y }}
       >
         <motion.div
@@ -69,7 +69,7 @@ export default function PageHero({ theme, title, highlightedWord, subtitle, chil
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
           <motion.h1
-            className={`font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black ${config.glowClass} ${config.titleColor} mb-4 tracking-wider`}
+            className={`font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black ${config.glowClass} ${config.titleColor} mb-3 tracking-wider`}
           >
             {title}
             {highlightedWord && (
@@ -81,7 +81,7 @@ export default function PageHero({ theme, title, highlightedWord, subtitle, chil
           </motion.h1>
 
           <motion.p
-            className="text-text-secondary text-lg sm:text-xl md:text-2xl max-w-2xl mx-auto font-light leading-relaxed"
+            className="text-text-secondary text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}

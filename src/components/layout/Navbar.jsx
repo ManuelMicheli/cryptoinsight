@@ -35,17 +35,8 @@ export default function Navbar() {
       transition={{ duration: 0.6 }}
     >
       <div className="w-full max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center"
-            style={{
-              backgroundColor: 'color-mix(in srgb, var(--hero-primary) 20%, transparent)',
-              boxShadow: '0 0 10px color-mix(in srgb, var(--hero-primary) 30%, transparent), 0 0 40px color-mix(in srgb, var(--hero-primary) 10%, transparent)',
-            }}
-          >
-            <span className="font-heading text-sm font-bold" style={{ color: 'var(--hero-secondary)' }}>CI</span>
-          </div>
-          <span className="font-heading text-sm font-semibold hidden sm:block" style={{ color: 'var(--hero-primary)' }}>CRYPTO INSIGHTS</span>
+        <Link to="/" className="flex items-center group">
+          <span className="font-heading text-sm font-semibold" style={{ color: 'var(--hero-primary)' }}>CRYPTO INSIGHTS</span>
         </Link>
 
         {/* Desktop nav */}

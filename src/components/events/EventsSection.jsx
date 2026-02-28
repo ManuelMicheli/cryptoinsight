@@ -13,7 +13,7 @@ export default function EventsSection() {
       <SectionHeading
         title={t('eventsTitle', lang)}
         subtitle={t('eventsSubtitle', lang)}
-        glowColor="purple"
+        glowColor="amber"
       />
       <div className="w-full">
         <EventTimeline events={events} />

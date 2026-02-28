@@ -83,7 +83,7 @@ export default function BybitSection() {
       <SectionHeading
         title={t('bybitTitle', lang)}
         subtitle={t('bybitSubtitle', lang)}
-        glowColor="purple"
+        glowColor="cyan"
       />
 
       <div className="w-full max-w-2xl mx-auto">
@@ -95,10 +95,10 @@ export default function BybitSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <GlassCard hover={false} variant="purple">
+              <GlassCard hover={false} variant="cyan">
                 <div className="text-center mb-6">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-neon-purple/10 mb-4">
-                    <svg viewBox="0 0 24 24" className="w-8 h-8 text-neon-purple" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-neon-cyan/10 mb-4">
+                    <svg viewBox="0 0 24 24" className="w-8 h-8 text-neon-cyan" fill="none" stroke="currentColor" strokeWidth="1.5">
                       <path d="M13.5 3H12H8C6.34315 3 5 4.34315 5 6V18C5 19.6569 6.34315 21 8 21H11M13.5 3L19 8.625M13.5 3V7.625C13.5 8.17728 13.9477 8.625 14.5 8.625H19M19 8.625V11" />
                       <path d="M17 15V18M17 21V18M17 18H14M17 18H20" />
                     </svg>
@@ -122,7 +122,7 @@ export default function BybitSection() {
                           type="button"
                           onClick={() => setRegion(val)}
                           className={`flex-1 py-2 rounded-xl text-sm font-medium transition-all ${region === val
-                              ? 'glass glow-purple text-neon-purple'
+                              ? 'glass glow-cyan text-neon-cyan'
                               : 'bg-white/5 text-text-secondary hover:text-text-primary'
                             }`}
                         >
@@ -139,7 +139,7 @@ export default function BybitSection() {
                       value={apiKey}
                       onChange={(e) => setApiKey(e.target.value)}
                       placeholder={t('bybitApiKeyPlaceholder', lang)}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:outline-none focus:border-neon-purple/50 transition-colors"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:outline-none focus:border-neon-cyan/50 transition-colors"
                     />
                   </div>
 
@@ -150,7 +150,7 @@ export default function BybitSection() {
                       value={apiSecret}
                       onChange={(e) => setApiSecret(e.target.value)}
                       placeholder={t('bybitSecretPlaceholder', lang)}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:outline-none focus:border-neon-purple/50 transition-colors"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:outline-none focus:border-neon-cyan/50 transition-colors"
                     />
                   </div>
 
@@ -161,7 +161,7 @@ export default function BybitSection() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-3 rounded-xl font-heading text-sm font-semibold bg-neon-purple text-white hover:bg-neon-purple/80 transition-colors disabled:opacity-50 glow-purple"
+                    className="w-full py-3 rounded-xl font-heading text-sm font-semibold bg-neon-cyan text-white hover:bg-neon-cyan/80 text-bg-primary transition-colors disabled:opacity-50 glow-cyan"
                   >
                     {loading ? t('bybitConnecting', lang) : t('bybitConnectBtn', lang)}
                   </button>

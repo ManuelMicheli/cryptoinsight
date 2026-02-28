@@ -10,8 +10,8 @@ export default function NewsCard({ article }) {
 
   return (
     <motion.div variants={fadeInUp}>
-      <GlassCard className="flex flex-col h-full relative overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-cyan/30 to-transparent" />
+      <GlassCard variant="dark" className="flex flex-col h-full relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-purple/30 to-transparent" />
         <div className="flex items-start justify-between gap-3 mb-4">
           <CategoryTag category={l(article.category, lang)} />
           <span className="text-text-secondary text-sm flex-shrink-0">{l(article.time, lang)}</span>

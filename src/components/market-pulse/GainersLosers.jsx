@@ -28,7 +28,7 @@ export default function GainersLosers({ coins }) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-      <div className="panel panel-green">
+      <div className="panel panel-dark">
         <h4 className="font-heading text-base text-neon-green mb-4 flex items-center gap-2">
           <span>▲</span> {t('gainersTitle', lang)}
         </h4>
@@ -39,7 +39,7 @@ export default function GainersLosers({ coins }) {
         </div>
       </div>
 
-      <div className="panel" style={{ background: 'linear-gradient(145deg, rgba(100, 0, 0, 0.8), rgba(239, 68, 68, 0.2))', borderColor: 'rgba(239, 68, 68, 0.15)', boxShadow: '0 8px 32px rgba(239, 68, 68, 0.1)' }}>
+      <div className="panel panel-dark">
         <h4 className="font-heading text-base text-neon-red mb-4 flex items-center gap-2">
           <span>▼</span> {t('losersTitle', lang)}
         </h4>

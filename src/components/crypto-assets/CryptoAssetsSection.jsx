@@ -23,38 +23,43 @@ export default function CryptoAssetsSection({ coins, loading }) {
     : []
 
   return (
-    <SectionWrapper id="crypto" className="bg-bg-secondary/30">
-      <SectionHeading
-        title={t('cryptoAssetsTitle', lang)}
-        subtitle={t('cryptoAssetsSubtitle', lang)}
-        glowColor="cyan"
-      />
+    <section id="crypto" className="w-full bg-bg-secondary/30">
+      <div className="w-full max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16 pt-12 md:pt-16 lg:pt-20 pb-6">
+        <SectionHeading
+          title={t('cryptoAssetsTitle', lang)}
+          subtitle={t('cryptoAssetsSubtitle', lang)}
+          glowColor="cyan"
+        />
+        <CategoryTabs active={activeCategory} onChange={setActiveCategory} />
+      </div>
 
-      <CategoryTabs active={activeCategory} onChange={setActiveCategory} />
-
-      {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {Array.from({ length: 6 }, (_, i) => (
-            <div key={i} className="panel">
-              <SkeletonLoader lines={4} />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((coin) => (
-              <CryptoCard key={coin.id} coin={coin} />
+      <div className="w-full px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20">
+        {loading ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 lg:gap-5">
+            {Array.from({ length: 6 }, (_, i) => (
+              <div key={i} className="panel">
+                <SkeletonLoader lines={4} />
+              </div>
             ))}
-          </AnimatePresence>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 lg:gap-5">
+            <AnimatePresence mode="popLayout">
+              {filtered.map((coin) => (
+                <CryptoCard key={coin.id} coin={coin} />
+              ))}
+            </AnimatePresence>
+          </div>
+        )}
+
+        {filtered.length === 0 && !loading && (
+          <p className="text-center text-text-secondary py-12">{t('cryptoNoCategory', lang)}</p>
+        )}
+
+        <div className="max-w-[1280px] mx-auto px-2 md:px-6 lg:px-8">
+          <DisclaimerBanner />
         </div>
-      )}
-
-      {filtered.length === 0 && !loading && (
-        <p className="text-center text-text-secondary py-12">{t('cryptoNoCategory', lang)}</p>
-      )}
-
-      <DisclaimerBanner />
-    </SectionWrapper>
+      </div>
+    </section>
   )
 }

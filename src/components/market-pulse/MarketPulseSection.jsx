@@ -18,11 +18,12 @@ export default function MarketPulseSection({ globalData, globalLoading, fearGree
       <SectionHeading
         title={t('marketPulseTitle', lang)}
         subtitle={t('marketPulseSubtitle', lang)}
+        glowColor="green"
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12">
         {/* Fear & Greed */}
-        <div className="panel flex items-center justify-center">
+        <div className="panel panel-dark flex items-center justify-center">
           {fearGreedLoading ? (
             <SkeletonLoader lines={3} />
           ) : (
@@ -36,7 +37,7 @@ export default function MarketPulseSection({ globalData, globalLoading, fearGree
         {/* Stats */}
         {globalLoading ? (
           Array.from({ length: 3 }, (_, i) => (
-            <div key={i} className="panel">
+            <div key={i} className="panel panel-dark">
               <SkeletonLoader lines={2} />
             </div>
           ))

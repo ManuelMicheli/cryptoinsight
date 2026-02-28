@@ -14,12 +14,12 @@ export default function EventCard({ event }) {
     <motion.div variants={fadeInUp} className="flex gap-4 md:gap-6">
       {/* Date */}
       <div className="flex-shrink-0 w-20 md:w-24 text-center pt-2">
-        <div className="font-heading text-3xl md:text-4xl font-bold text-neon-cyan">{day}</div>
+        <div className="font-heading text-3xl md:text-4xl font-bold text-neon-amber">{day}</div>
         <div className="text-xs md:text-sm text-text-secondary mt-1 tracking-widest">{month}</div>
       </div>
 
       {/* Content */}
-      <div className="panel flex-1 border-l-2 border-neon-cyan/30" style={{ minHeight: 'auto' }}>
+      <div className="panel panel-dark flex-1 border-l-2 border-neon-amber/30" style={{ minHeight: 'auto' }}>
         <div className="flex items-start justify-between gap-4 mb-3">
           <h4 className="text-lg md:text-xl font-semibold text-text-primary">{l(event.title, lang)}</h4>
           <ImpactBadge impact={event.impact} />

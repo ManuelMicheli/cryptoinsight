@@ -48,10 +48,25 @@ export function PaletteCycleProvider({ children }) {
   const shaderColorsRef = useRef(PALETTES[0].shader)
   const isHome = pathname === '/'
 
+  const ROUTE_COLORS = {
+    '/crypto':  { primary: '#00f0ff', secondary: '#00f0ff', mid: '#7cb8ff' },
+    '/mercato': { primary: '#00ff88', secondary: '#00ff88', mid: '#00f8c0' },
+    '/eventi':  { primary: '#f59e0b', secondary: '#f59e0b', mid: '#fbbf24' },
+    '/news':    { primary: '#8b5cf6', secondary: '#8b5cf6', mid: '#a78bfa' },
+  }
+
+  const ROUTE_SHADER = {
+    '/crypto':  PALETTES[1].shader,
+    '/mercato': PALETTES[2].shader,
+    '/eventi':  PALETTES[0].shader,
+    '/news':    PALETTES[3].shader,
+  }
+
   useEffect(() => {
     if (!isHome) {
-      setPaletteIndex(0)
-      shaderColorsRef.current = PALETTES[0].shader
+      const shader = ROUTE_SHADER[pathname] ?? PALETTES[0].shader
+      shaderColorsRef.current = shader
+      setPaletteIndex(-1)
       return
     }
 
@@ -64,15 +79,16 @@ export function PaletteCycleProvider({ children }) {
     }, 4000)
 
     return () => clearInterval(id)
-  }, [isHome])
+  }, [isHome, pathname])
 
-  const palette = PALETTES[paletteIndex]
+  const palette = paletteIndex >= 0 ? PALETTES[paletteIndex] : null
+  const routeColors = ROUTE_COLORS[pathname]
 
   const cssVars = useMemo(() => ({
-    '--hero-primary': palette.css.primary,
-    '--hero-secondary': palette.css.secondary,
-    '--hero-mid': palette.css.mid,
-  }), [palette])
+    '--hero-primary': routeColors?.primary ?? palette?.css.primary ?? '#8b5cf6',
+    '--hero-secondary': routeColors?.secondary ?? palette?.css.secondary ?? '#f59e0b',
+    '--hero-mid': routeColors?.mid ?? palette?.css.mid ?? '#c084fc',
+  }), [routeColors, palette])
 
   const value = useMemo(() => ({
     palette, cssVars, shaderColorsRef,

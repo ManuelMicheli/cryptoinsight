@@ -2,7 +2,12 @@ import { motion } from 'motion/react'
 import { fadeInUp } from '../../hooks/useInViewAnimation'
 
 export default function SectionHeading({ title, subtitle, glowColor = 'cyan' }) {
-  const glowClass = glowColor === 'purple' ? 'text-glow-purple text-neon-purple' : 'text-glow-cyan text-neon-cyan'
+  const glowClass = {
+    cyan: 'text-glow-cyan text-neon-cyan',
+    purple: 'text-glow-purple text-neon-purple',
+    green: 'text-glow-green text-neon-green',
+    amber: 'text-glow-amber text-neon-amber',
+  }[glowColor] || 'text-glow-cyan text-neon-cyan'
 
   return (
     <motion.div
