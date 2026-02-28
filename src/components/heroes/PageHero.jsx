@@ -1,28 +1,53 @@
+import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
-import { MeshGradient } from '@paper-design/shaders-react'
+import ShaderBackground from '../hero/ShaderBackground'
 import HeroScrollIndicator from './HeroScrollIndicator'
 
 const THEMES = {
   crypto: {
     colors: ['#0a1a2a', '#0e2a3a', '#00f0ff', '#00c8ff'],
+    shader: {
+      tintTop: [0.0, 0.94, 1.0],
+      tintBottom: [0.0, 0.78, 1.0],
+      fogColor: [0.04, 0.10, 0.16],
+      oscFreq: [4.0, 1.5, 1.0],
+    },
     titleColor: 'text-neon-cyan',
     glowClass: 'text-glow-cyan',
     accentColor: 'text-glow-cyan text-neon-cyan',
   },
   market: {
     colors: ['#0a1a0a', '#0e2a1a', '#00ff88', '#00d870'],
+    shader: {
+      tintTop: [0.0, 1.0, 0.53],
+      tintBottom: [0.0, 0.85, 0.44],
+      fogColor: [0.04, 0.10, 0.04],
+      oscFreq: [1.5, 3.5, 2.0],
+    },
     titleColor: 'text-neon-green',
     glowClass: 'text-glow-green',
     accentColor: 'text-glow-green text-neon-green',
   },
   events: {
     colors: ['#1a1400', '#2e2000', '#f59e0b', '#e8890a'],
+    shader: {
+      tintTop: [0.96, 0.62, 0.04],
+      tintBottom: [0.91, 0.54, 0.04],
+      fogColor: [0.10, 0.08, 0.0],
+      oscFreq: [2.2, 1.2, 3.0],
+    },
     titleColor: 'text-neon-amber',
     glowClass: 'text-glow-amber',
     accentColor: 'text-glow-amber text-neon-amber',
   },
   news: {
     colors: ['#1a0a2e', '#2e0d3a', '#8b5cf6', '#a78bfa'],
+    shader: {
+      tintTop: [0.55, 0.36, 0.96],
+      tintBottom: [0.65, 0.55, 0.98],
+      fogColor: [0.10, 0.04, 0.18],
+      oscFreq: [3.0, 2.0, 1.5],
+    },
     titleColor: 'text-neon-purple',
     glowClass: 'text-glow-purple',
     accentColor: 'text-glow-purple text-neon-purple',
@@ -31,19 +56,14 @@ const THEMES = {
 
 export default function PageHero({ theme, title, highlightedWord, subtitle, children }) {
   const config = THEMES[theme]
+  const shaderColorsRef = useRef(config.shader)
   const { scrollY } = useScroll()
   const opacity = useTransform(scrollY, [0, 300], [1, 0])
   const y = useTransform(scrollY, [0, 300], [0, 80])
 
   return (
     <section className="relative min-h-[40vh] flex flex-col justify-center overflow-hidden">
-      <MeshGradient
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-        colors={config.colors}
-        speed={0.3}
-        distortion={0.5}
-        swirl={0.12}
-      />
+      <ShaderBackground shaderColorsRef={shaderColorsRef} />
 
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-bg-primary/60 via-transparent to-bg-primary" />
 

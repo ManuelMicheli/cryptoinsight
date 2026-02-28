@@ -1,10 +1,16 @@
-import { useEffect } from 'react'
-import { Outlet, useLocation } from 'react-router'
+import { useEffect, useState } from 'react'
+import { useLocation, useOutlet } from 'react-router'
 import { AnimatePresence } from 'motion/react'
 import { useLenis } from '../../hooks/useLenis'
 import ScrollProgress from '../ui/ScrollProgress'
 import Navbar from './Navbar'
 import Footer from './Footer'
+
+function FrozenOutlet() {
+  const o = useOutlet()
+  const [outlet] = useState(o)
+  return outlet
+}
 
 export default function Layout() {
   const location = useLocation()
@@ -24,7 +30,7 @@ export default function Layout() {
       {!isHome && <ScrollProgress />}
       <Navbar />
       <AnimatePresence mode="wait">
-        <Outlet key={location.pathname} />
+        <FrozenOutlet key={location.pathname} />
       </AnimatePresence>
       {!isHome && <Footer />}
     </div>

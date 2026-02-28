@@ -8,7 +8,8 @@
       "WebFetch(domain:alternative.me)",
       "WebFetch(domain:api.alternative.me)",
       "WebFetch(domain:www.npmjs.com)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(gh repo:*)"
     ]
   }
 }

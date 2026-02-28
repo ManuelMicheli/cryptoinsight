@@ -43,7 +43,7 @@ export default function CryptoCard({ coin }) {
         </div>
 
         {/* Price */}
-        <div className="font-heading text-lg md:text-xl font-bold" style={{ color: accentColor }}>{formatCurrency(coin.current_price, 2, currency)}</div>
+        <div className="font-heading text-lg md:text-xl font-bold text-white">{formatCurrency(coin.current_price, 2, currency)}</div>
 
         {/* Sparkline */}
         <div className="flex items-center justify-center">

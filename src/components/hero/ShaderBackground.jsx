@@ -308,13 +308,18 @@ function useShaderBackground(shaderColorsRef) {
       if (!canvasRef.current) return;
       const c = canvasRef.current;
       const d = Math.max(1, 0.5 * window.devicePixelRatio);
-      c.width = window.innerWidth * d;
-      c.height = window.innerHeight * d;
+      const w = c.offsetWidth || window.innerWidth;
+      const h = c.offsetHeight || window.innerHeight;
+      c.width = w * d;
+      c.height = h * d;
       if (rendererRef.current) rendererRef.current.updateScale(d);
       if (pointersRef.current) pointersRef.current.updateScale(d);
     };
 
     resize();
+
+    const observer = new ResizeObserver(resize);
+    observer.observe(canvas);
 
     if (rendererRef.current.test(defaultShaderSource) === null) {
       rendererRef.current.updateShader(defaultShaderSource);
@@ -339,6 +344,7 @@ function useShaderBackground(shaderColorsRef) {
 
     return () => {
       window.removeEventListener('resize', resize);
+      observer.disconnect();
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
       if (rendererRef.current) rendererRef.current.reset();
     };

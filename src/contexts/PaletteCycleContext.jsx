@@ -70,6 +70,9 @@ export function PaletteCycleProvider({ children }) {
       return
     }
 
+    setPaletteIndex(0)
+    shaderColorsRef.current = PALETTES[0].shader
+
     const id = setInterval(() => {
       setPaletteIndex(prev => {
         const next = (prev + 1) % PALETTES.length

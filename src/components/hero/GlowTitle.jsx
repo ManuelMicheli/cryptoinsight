@@ -28,6 +28,7 @@ export default function GlowTitle() {
   }, [])
 
   useEffect(() => {
+    if (!palette) return
     const { primary, secondary } = palette.css
     const tween = gsap.to('.gsap-glow-title', {
       textShadow: `0 0 20px ${primary}99, 0 0 60px ${secondary}4D, 0 0 100px ${primary}26`,
