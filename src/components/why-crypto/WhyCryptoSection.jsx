@@ -1,5 +1,4 @@
 import SectionWrapper from '../layout/SectionWrapper'
-import SectionHeading from '../ui/SectionHeading'
 import FeatureCard from './FeatureCard'
 import { useLanguage } from '../../contexts/LanguageContext'
 import { t } from '../../i18n/translations'
@@ -30,10 +29,15 @@ export default function WhyCryptoSection() {
 
   return (
     <SectionWrapper id="why-crypto">
-      <SectionHeading
-        title={t('whyCryptoTitle', lang)}
-        subtitle={t('whyCryptoSubtitle', lang)}
-      />
+      <div className="text-center mb-16 md:mb-20">
+        <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6 tracking-tight">
+          {t('whyCryptoTitle', lang)}
+        </h2>
+        <p className="text-text-secondary text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
+          {t('whyCryptoSubtitle', lang)}
+        </p>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
         {features.map((f) => (
           <FeatureCard key={f.icon} {...f} />

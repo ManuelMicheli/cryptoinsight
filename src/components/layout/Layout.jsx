@@ -17,14 +17,16 @@ export default function Layout() {
     }
   }, [location.pathname, lenisRef])
 
+  const isHome = location.pathname === '/'
+
   return (
     <div className="min-h-screen bg-bg-primary">
-      <ScrollProgress />
+      {!isHome && <ScrollProgress />}
       <Navbar />
       <AnimatePresence mode="wait">
         <Outlet key={location.pathname} />
       </AnimatePresence>
-      <Footer />
+      {!isHome && <Footer />}
     </div>
   )
 }

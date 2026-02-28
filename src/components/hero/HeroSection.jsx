@@ -1,26 +1,25 @@
-import { motion, useScroll, useTransform } from 'motion/react'
+import { motion } from 'motion/react'
 import ShaderBackground from './ShaderBackground'
 import GlowTitle from './GlowTitle'
 import PriceTicker from './PriceTicker'
 import CTAButton from './CTAButton'
 import { useLanguage } from '../../contexts/LanguageContext'
+import { usePaletteCycle } from '../../contexts/PaletteCycleContext'
 import { t } from '../../i18n/translations'
 
 export default function HeroSection({ coins }) {
-  const { scrollY } = useScroll()
-  const opacity = useTransform(scrollY, [0, 400], [1, 0])
-  const y = useTransform(scrollY, [0, 400], [0, 100])
   const { lang } = useLanguage()
+  const { cssVars, shaderColorsRef } = usePaletteCycle()
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-      <ShaderBackground />
+    <section
+      className="relative h-dvh flex flex-col justify-center overflow-hidden hero-transition"
+      style={cssVars}
+    >
+      <ShaderBackground shaderColorsRef={shaderColorsRef} />
 
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bg-primary z-[1]" />
-
-      <motion.div
+      <div
         className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 pt-20 pb-8"
-        style={{ opacity, y }}
       >
         <GlowTitle />
 
@@ -34,7 +33,7 @@ export default function HeroSection({ coins }) {
             {t('heroCTA', lang)} &darr;
           </CTAButton>
         </motion.div>
-      </motion.div>
+      </div>
 
       <div className="relative z-10 mt-auto">
         <PriceTicker coins={coins} />

@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router'
 import { motion } from 'motion/react'
 import { useCurrency } from '../../contexts/CurrencyContext'
 import { useLanguage } from '../../contexts/LanguageContext'
+import { usePaletteCycle } from '../../contexts/PaletteCycleContext'
 import { t } from '../../i18n/translations'
 
 export default function Navbar() {
@@ -10,6 +11,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { currency, toggleCurrency } = useCurrency()
   const { lang, toggleLang } = useLanguage()
+  const { cssVars } = usePaletteCycle()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -26,17 +28,24 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled ? 'glass py-3' : 'py-5'}`}
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 hero-transition ${scrolled ? 'glass py-3 mx-4 mt-4 rounded-[3rem]' : 'py-5'}`}
+      style={cssVars}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
     >
       <div className="w-full max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-neon-cyan/20 flex items-center justify-center glow-cyan">
-            <span className="font-heading text-neon-cyan text-sm font-bold">CI</span>
+          <div
+            className="w-8 h-8 rounded-lg flex items-center justify-center"
+            style={{
+              backgroundColor: 'color-mix(in srgb, var(--hero-primary) 20%, transparent)',
+              boxShadow: '0 0 10px color-mix(in srgb, var(--hero-primary) 30%, transparent), 0 0 40px color-mix(in srgb, var(--hero-primary) 10%, transparent)',
+            }}
+          >
+            <span className="font-heading text-sm font-bold" style={{ color: 'var(--hero-secondary)' }}>CI</span>
           </div>
-          <span className="font-heading text-sm font-semibold text-neon-cyan hidden sm:block">CRYPTO INSIGHTS</span>
+          <span className="font-heading text-sm font-semibold hidden sm:block" style={{ color: 'var(--hero-primary)' }}>CRYPTO INSIGHTS</span>
         </Link>
 
         {/* Desktop nav */}
@@ -46,11 +55,12 @@ export default function Navbar() {
               key={path}
               to={path}
               className={({ isActive }) =>
-                `text-sm font-medium transition-colors ${
-                  isActive
-                    ? 'text-neon-cyan text-glow-cyan'
-                    : 'text-text-secondary hover:text-neon-cyan'
-                }`
+                `text-sm font-medium transition-colors ${isActive ? '' : 'text-text-secondary hover:text-text-primary'}`
+              }
+              style={({ isActive }) =>
+                isActive
+                  ? { color: 'var(--hero-secondary)', textShadow: '0 0 10px color-mix(in srgb, var(--hero-primary) 50%, transparent), 0 0 40px color-mix(in srgb, var(--hero-primary) 20%, transparent)' }
+                  : undefined
               }
             >
               {label}
@@ -62,17 +72,27 @@ export default function Navbar() {
           {/* Language toggle */}
           <button
             onClick={toggleLang}
-            className="relative flex items-center w-[68px] h-8 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm overflow-hidden transition-colors hover:border-neon-purple/30"
+            className="relative flex items-center w-[68px] h-8 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm overflow-hidden transition-colors"
           >
             <motion.div
-              className="absolute top-0.5 w-[32px] h-7 rounded-full bg-neon-purple/20 glow-purple"
+              className="absolute top-0.5 w-[32px] h-7 rounded-full"
+              style={{
+                backgroundColor: 'color-mix(in srgb, var(--hero-primary) 20%, transparent)',
+                boxShadow: '0 0 10px color-mix(in srgb, var(--hero-primary) 30%, transparent), 0 0 40px color-mix(in srgb, var(--hero-primary) 10%, transparent)',
+              }}
               animate={{ left: lang === 'it' ? 1 : 33 }}
               transition={{ type: 'spring', stiffness: 400, damping: 30 }}
             />
-            <span className={`relative z-10 flex-1 text-xs font-bold text-center transition-colors ${lang === 'it' ? 'text-neon-purple' : 'text-text-secondary'}`}>
+            <span
+              className="relative z-10 flex-1 text-xs font-bold text-center transition-colors"
+              style={{ color: lang === 'it' ? 'var(--hero-primary)' : undefined }}
+            >
               IT
             </span>
-            <span className={`relative z-10 flex-1 text-xs font-bold text-center transition-colors ${lang === 'en' ? 'text-neon-purple' : 'text-text-secondary'}`}>
+            <span
+              className={`relative z-10 flex-1 text-xs font-bold text-center transition-colors ${lang === 'en' ? '' : 'text-text-secondary'}`}
+              style={{ color: lang === 'en' ? 'var(--hero-primary)' : undefined }}
+            >
               EN
             </span>
           </button>
@@ -80,24 +100,34 @@ export default function Navbar() {
           {/* Currency toggle */}
           <button
             onClick={toggleCurrency}
-            className="relative flex items-center w-[72px] h-8 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm overflow-hidden transition-colors hover:border-neon-cyan/30"
+            className="relative flex items-center w-[72px] h-8 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm overflow-hidden transition-colors"
           >
             <motion.div
-              className="absolute top-0.5 w-[34px] h-7 rounded-full bg-neon-cyan/20 glow-cyan"
+              className="absolute top-0.5 w-[34px] h-7 rounded-full"
+              style={{
+                backgroundColor: 'color-mix(in srgb, var(--hero-secondary) 20%, transparent)',
+                boxShadow: '0 0 10px color-mix(in srgb, var(--hero-secondary) 30%, transparent), 0 0 40px color-mix(in srgb, var(--hero-secondary) 10%, transparent)',
+              }}
               animate={{ left: currency === 'usd' ? 1 : 35 }}
               transition={{ type: 'spring', stiffness: 400, damping: 30 }}
             />
-            <span className={`relative z-10 flex-1 text-xs font-bold text-center transition-colors ${currency === 'usd' ? 'text-neon-cyan' : 'text-text-secondary'}`}>
+            <span
+              className={`relative z-10 flex-1 text-xs font-bold text-center transition-colors ${currency === 'usd' ? '' : 'text-text-secondary'}`}
+              style={{ color: currency === 'usd' ? 'var(--hero-secondary)' : undefined }}
+            >
               USD
             </span>
-            <span className={`relative z-10 flex-1 text-xs font-bold text-center transition-colors ${currency === 'eur' ? 'text-neon-cyan' : 'text-text-secondary'}`}>
+            <span
+              className={`relative z-10 flex-1 text-xs font-bold text-center transition-colors ${currency === 'eur' ? '' : 'text-text-secondary'}`}
+              style={{ color: currency === 'eur' ? 'var(--hero-secondary)' : undefined }}
+            >
               EUR
             </span>
           </button>
 
           <div className="hidden sm:flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-neon-green animate-glow-pulse" />
-            <span className="text-xs text-neon-green font-medium">LIVE</span>
+            <div className="w-2 h-2 rounded-full animate-glow-pulse" style={{ backgroundColor: 'var(--hero-secondary)' }} />
+            <span className="text-xs font-medium" style={{ color: 'var(--hero-secondary)' }}>LIVE</span>
           </div>
 
           {/* Mobile hamburger */}
@@ -125,9 +155,10 @@ export default function Navbar() {
               to={path}
               onClick={() => setMobileOpen(false)}
               className={({ isActive }) =>
-                `block text-base font-medium transition-colors ${
-                  isActive ? 'text-neon-cyan' : 'text-text-secondary'
-                }`
+                `block text-base font-medium transition-colors ${isActive ? '' : 'text-text-secondary'}`
+              }
+              style={({ isActive }) =>
+                isActive ? { color: 'var(--hero-secondary)' } : undefined
               }
             >
               {label}

@@ -1,25 +1,19 @@
-import { useCryptoMarkets } from '../hooks/useCryptoMarkets'
-import { useCurrency } from '../contexts/CurrencyContext'
-import { useLanguage } from '../contexts/LanguageContext'
-import { t } from '../i18n/translations'
+import { useCryptoData } from '../contexts/CryptoDataContext'
 import PageTransition from '../components/layout/PageTransition'
-import PageHero from '../components/heroes/PageHero'
+import WhyCryptoSection from '../components/why-crypto/WhyCryptoSection'
+import HomePreviewsGrid from '../components/home/HomePreviewsGrid'
+import ExploreNewsSection from '../components/explore-news/ExploreNewsSection'
 import CryptoAssetsSection from '../components/crypto-assets/CryptoAssetsSection'
 import BybitSection from '../components/bybit/BybitSection'
 
 export default function CryptoPage() {
-  const { currency } = useCurrency()
-  const { lang } = useLanguage()
-  const { data: coins, loading } = useCryptoMarkets(currency)
+  const { coins, coinsLoading: loading } = useCryptoData()
 
   return (
     <PageTransition>
-      <PageHero
-        theme="crypto"
-        title={t('cryptoHeroTitle', lang)}
-        highlightedWord={t('cryptoHeroHighlight', lang)}
-        subtitle={t('cryptoHeroSubtitle', lang)}
-      />
+      <WhyCryptoSection />
+      <HomePreviewsGrid />
+      <ExploreNewsSection />
       <CryptoAssetsSection coins={coins} loading={loading} />
       <BybitSection />
     </PageTransition>

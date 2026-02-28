@@ -3,12 +3,16 @@ import { useRef, useEffect } from 'react'
 const defaultShaderSource = `#version 300 es
 /*********
 * made by Matthias Hurrle (@atzedent)
-* Color palette adapted for cyan/purple theme
+* Color palette adapted for dynamic theme cycling
 */
 precision highp float;
 out vec4 O;
 uniform vec2 resolution;
 uniform float time;
+uniform vec3 tintTop;
+uniform vec3 tintBottom;
+uniform vec3 fogColor;
+uniform vec3 oscFreq;
 #define FC gl_FragCoord.xy
 #define T time
 #define R resolution
@@ -55,10 +59,12 @@ void main(void) {
     uv+=.1*cos(i*vec2(.1+.01*i, .8)+i*i+T*.5+.1*uv.x);
     vec2 p=uv;
     float d=length(p);
-    col+=.00125/d*(cos(sin(i)*vec3(4, 1.5, 1))+1.);
+    col+=.00125/d*(cos(sin(i)*oscFreq)+1.);
     float b=noise(i+p+bg*1.731);
-    col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)))*vec3(0.3, 0.85, 1.0);
-    col=mix(col,vec3(bg*.05,bg*.15,bg*.25),d);
+    float blend=smoothstep(-0.6,0.6,p.y);
+    vec3 tint=mix(tintBottom,tintTop,blend);
+    col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)))*tint;
+    col=mix(col,bg*fogColor,d);
   }
   O=vec4(col,1);
 }`;
@@ -85,6 +91,18 @@ class WebGLRenderer {
     this.mouseCoords = [0, 0];
     this.pointerCoords = [0, 0];
     this.nbrOfPointers = 0;
+    this.currentColors = {
+      tintTop: [0.55, 0.2, 0.95],
+      tintBottom: [0.96, 0.55, 0.05],
+      fogColor: [0.14, 0.06, 0.12],
+      oscFreq: [2.2, 1.2, 3.0],
+    };
+    this.targetColors = {
+      tintTop: [0.55, 0.2, 0.95],
+      tintBottom: [0.96, 0.55, 0.05],
+      fogColor: [0.14, 0.06, 0.12],
+      oscFreq: [2.2, 1.2, 3.0],
+    };
   }
 
   updateShader(source) {
@@ -98,6 +116,15 @@ class WebGLRenderer {
   updateMouse(coords) { this.mouseCoords = coords; }
   updatePointerCoords(coords) { this.pointerCoords = coords; }
   updatePointerCount(nbr) { this.nbrOfPointers = nbr; }
+
+  updateColors(targets) {
+    this.targetColors = {
+      tintTop: [...targets.tintTop],
+      tintBottom: [...targets.tintBottom],
+      fogColor: [...targets.fogColor],
+      oscFreq: [...targets.oscFreq],
+    };
+  }
 
   updateScale(scale) {
     this.scale = scale;
@@ -171,6 +198,10 @@ class WebGLRenderer {
     program._touch = gl.getUniformLocation(program, 'touch');
     program._pointerCount = gl.getUniformLocation(program, 'pointerCount');
     program._pointers = gl.getUniformLocation(program, 'pointers');
+    program._tintTop = gl.getUniformLocation(program, 'tintTop');
+    program._tintBottom = gl.getUniformLocation(program, 'tintBottom');
+    program._fogColor = gl.getUniformLocation(program, 'fogColor');
+    program._oscFreq = gl.getUniformLocation(program, 'oscFreq');
   }
 
   render(now = 0) {
@@ -187,6 +218,16 @@ class WebGLRenderer {
     gl.uniform2f(program._touch, this.mouseCoords[0], this.mouseCoords[1]);
     gl.uniform1i(program._pointerCount, this.nbrOfPointers);
     gl.uniform2fv(program._pointers, this.pointerCoords);
+    const s = 0.015;
+    for (const key of ['tintTop', 'tintBottom', 'fogColor', 'oscFreq']) {
+      for (let j = 0; j < 3; j++) {
+        this.currentColors[key][j] += (this.targetColors[key][j] - this.currentColors[key][j]) * s;
+      }
+    }
+    gl.uniform3fv(program._tintTop, this.currentColors.tintTop);
+    gl.uniform3fv(program._tintBottom, this.currentColors.tintBottom);
+    gl.uniform3fv(program._fogColor, this.currentColors.fogColor);
+    gl.uniform3fv(program._oscFreq, this.currentColors.oscFreq);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
   }
 }
@@ -245,7 +286,7 @@ class PointerHandler {
   }
 }
 
-function useShaderBackground() {
+function useShaderBackground(shaderColorsRef) {
   const canvasRef = useRef(null);
   const animationFrameRef = useRef();
   const rendererRef = useRef(null);
@@ -281,6 +322,9 @@ function useShaderBackground() {
 
     const loop = (now) => {
       if (!rendererRef.current || !pointersRef.current) return;
+      if (shaderColorsRef?.current) {
+        rendererRef.current.updateColors(shaderColorsRef.current);
+      }
       rendererRef.current.updateMouse(pointersRef.current.getFirst());
       rendererRef.current.updatePointerCount(pointersRef.current.count);
       rendererRef.current.updatePointerCoords(pointersRef.current.coords);
@@ -303,8 +347,8 @@ function useShaderBackground() {
   return canvasRef;
 }
 
-export default function ShaderBackground() {
-  const canvasRef = useShaderBackground();
+export default function ShaderBackground({ shaderColorsRef }) {
+  const canvasRef = useShaderBackground(shaderColorsRef);
 
   return (
     <canvas

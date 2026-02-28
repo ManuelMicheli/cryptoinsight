@@ -1,38 +1,59 @@
-import { motion } from 'motion/react'
+import { useRef, useEffect } from 'react'
 import { useLanguage } from '../../contexts/LanguageContext'
+import { usePaletteCycle } from '../../contexts/PaletteCycleContext'
 import { t } from '../../i18n/translations'
+import gsap from 'gsap'
 
 export default function GlowTitle() {
   const { lang } = useLanguage()
+  const { palette } = usePaletteCycle()
+  const containerRef = useRef()
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.gsap-reveal',
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          stagger: 0.08,
+          ease: 'power3.out',
+        }
+      )
+    }, containerRef)
+
+    return () => ctx.revert()
+  }, [])
+
+  useEffect(() => {
+    const { primary, secondary } = palette.css
+    const tween = gsap.to('.gsap-glow-title', {
+      textShadow: `0 0 20px ${primary}99, 0 0 60px ${secondary}4D, 0 0 100px ${primary}26`,
+      duration: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+    })
+    return () => tween.kill()
+  }, [palette])
 
   return (
-    <motion.div
-      className="text-center relative z-10"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
-    >
-      <motion.h1
-        className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-glow-cyan text-neon-cyan mb-4 tracking-wider"
-        animate={{ textShadow: [
-          '0 0 10px rgba(0,240,255,0.5), 0 0 40px rgba(0,240,255,0.2), 0 0 80px rgba(0,240,255,0.1)',
-          '0 0 20px rgba(0,240,255,0.7), 0 0 60px rgba(0,240,255,0.3), 0 0 100px rgba(0,240,255,0.15)',
-          '0 0 10px rgba(0,240,255,0.5), 0 0 40px rgba(0,240,255,0.2), 0 0 80px rgba(0,240,255,0.1)',
-        ]}}
-        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        CRYPTO
-        <br />
-        <span className="text-glow-purple text-neon-purple">INSIGHTS</span>
-      </motion.h1>
-      <motion.p
-        className="text-text-secondary text-lg sm:text-xl md:text-2xl max-w-xl mx-auto font-light"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.8 }}
-      >
+    <div ref={containerRef} className="text-center relative z-10">
+      <h1 className="gsap-reveal gsap-glow-title font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-4 tracking-wider">
+        <span
+          className="inline-block bg-clip-text text-transparent"
+          style={{ backgroundImage: 'linear-gradient(to bottom, var(--hero-primary) 0%, var(--hero-mid) 40%, var(--hero-secondary) 100%)' }}
+        >
+          CRYPTO
+          <br />
+          INSIGHTS
+        </span>
+      </h1>
+      <p className="gsap-reveal text-text-secondary text-lg sm:text-xl md:text-2xl max-w-xl mx-auto font-light">
         {t('heroSubtitle', lang)}
-      </motion.p>
-    </motion.div>
+      </p>
+    </div>
   )
 }

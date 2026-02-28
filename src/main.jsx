@@ -5,15 +5,21 @@ import './index.css'
 import App from './App.jsx'
 import { CurrencyProvider } from './contexts/CurrencyContext.jsx'
 import { LanguageProvider } from './contexts/LanguageContext.jsx'
+import { CryptoDataProvider } from './contexts/CryptoDataContext.jsx'
+import { PaletteCycleProvider } from './contexts/PaletteCycleContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <LanguageProvider>
-        <CurrencyProvider>
-          <App />
-        </CurrencyProvider>
-      </LanguageProvider>
+      <PaletteCycleProvider>
+        <LanguageProvider>
+          <CurrencyProvider>
+            <CryptoDataProvider>
+              <App />
+            </CryptoDataProvider>
+          </CurrencyProvider>
+        </LanguageProvider>
+      </PaletteCycleProvider>
     </BrowserRouter>
   </StrictMode>,
 )

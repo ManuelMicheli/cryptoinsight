@@ -38,12 +38,12 @@ export default function FeatureCard({ icon, title, description, color = 'cyan' }
 
   return (
     <motion.div variants={fadeInUp}>
-      <GlassCard variant={color} className="text-center h-full">
-        <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 ${colorMap[color]} mb-6`}>
+      <GlassCard variant={color} className="text-center h-full !bg-black !bg-none !backdrop-blur-none transition-transform duration-300">
+        <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/5 ${colorMap[color]} mb-6`}>
           {icons[icon]}
         </div>
-        <h3 className="font-heading text-lg md:text-xl font-semibold text-text-primary mb-4">{title}</h3>
-        <p className="text-text-secondary text-sm md:text-base leading-relaxed">{description}</p>
+        <h3 className={`font-heading text-lg md:text-xl font-bold mb-4 ${colorMap[color]}`}>{title}</h3>
+        <p className={`text-sm md:text-base leading-relaxed ${colorMap[color]} opacity-80`}>{description}</p>
       </GlassCard>
     </motion.div>
   )

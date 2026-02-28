@@ -14,7 +14,7 @@ export default function PriceTicker({ coins }) {
           <div key={`${coin.id}-${i}`} className="flex items-center gap-3 px-4">
             <img src={coin.image} alt={coin.name} className="w-5 h-5 rounded-full" />
             <span className="text-sm font-medium text-text-primary">{coin.symbol?.toUpperCase()}</span>
-            <span className="text-sm text-neon-cyan">{formatCurrency(coin.current_price, 2, currency)}</span>
+            <span className="text-sm" style={{ color: 'var(--hero-primary)' }}>{formatCurrency(coin.current_price, 2, currency)}</span>
             <span className={`text-xs font-medium ${
               coin.price_change_percentage_24h >= 0 ? 'text-neon-green' : 'text-neon-red'
             }`}>
