@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence } from 'motion/react'
 import SectionWrapper from '../layout/SectionWrapper'
 import SectionHeading from '../ui/SectionHeading'
 import SkeletonLoader from '../ui/SkeletonLoader'
@@ -27,7 +27,7 @@ export default function CryptoAssetsSection({ coins, loading }) {
       <SectionHeading
         title={t('cryptoAssetsTitle', lang)}
         subtitle={t('cryptoAssetsSubtitle', lang)}
-        glowColor="purple"
+        glowColor="cyan"
       />
 
       <CategoryTabs active={activeCategory} onChange={setActiveCategory} />
@@ -41,13 +41,13 @@ export default function CryptoAssetsSection({ coins, loading }) {
           ))}
         </div>
       ) : (
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           <AnimatePresence mode="popLayout">
             {filtered.map((coin) => (
               <CryptoCard key={coin.id} coin={coin} />
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
       )}
 
       {filtered.length === 0 && !loading && (

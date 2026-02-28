@@ -1,5 +1,4 @@
 import { motion } from 'motion/react'
-import { fadeInUp } from '../../hooks/useInViewAnimation'
 import { formatCurrency, formatMarketCapRank } from '../../utils/formatters'
 import { useCurrency } from '../../contexts/CurrencyContext'
 import { useLanguage } from '../../contexts/LanguageContext'
@@ -18,8 +17,14 @@ export default function CryptoCard({ coin }) {
   const is7dPositive = (coin.price_change_percentage_7d_in_currency ?? 0) >= 0
 
   return (
-    <motion.div variants={fadeInUp} layout>
-      <GlassCard variant="purple" className="flex flex-col gap-5 h-full">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.3 }}
+      layout
+    >
+      <GlassCard variant="cyan" className="flex flex-col gap-5 h-full">
         {/* Header */}
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">

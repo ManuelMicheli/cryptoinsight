@@ -25,17 +25,16 @@ export function CryptoDataProvider({ children }) {
   const staleCoins = useRef(null)
   const staleGlobal = useRef(null)
   const staleFearGreed = useRef(null)
-  const isFirstFetch = useRef(true)
 
   // --- Coins + Global (depend on currency) ---
   const loadCoinsAndGlobal = useCallback(async () => {
-    const isFirst = isFirstFetch.current
-    if (isFirst) {
+    // Show loading only if we have NO data at all (first ever fetch)
+    const hasNoData = !staleCoins.current
+    if (hasNoData) {
       setCoinsLoading(true)
       setGlobalLoading(true)
     }
 
-    // Fetch both in parallel
     const [coinsResult, globalResult] = await Promise.allSettled([
       fetchCryptoMarkets(currency),
       fetchGlobalData(),
@@ -49,7 +48,9 @@ export function CryptoDataProvider({ children }) {
       setLastUpdated(new Date())
     } else {
       setCoinsError(coinsResult.reason?.message || 'Failed to fetch crypto data')
-      setCoins(staleCoins.current || mockCoins)
+      const fallback = staleCoins.current || mockCoins
+      setCoins(fallback)
+      staleCoins.current = fallback
     }
 
     // Handle global
@@ -57,13 +58,14 @@ export function CryptoDataProvider({ children }) {
       setGlobalData(globalResult.value)
       staleGlobal.current = globalResult.value
     } else {
-      setGlobalData(staleGlobal.current || mockGlobalData)
+      const fallback = staleGlobal.current || mockGlobalData
+      setGlobalData(fallback)
+      staleGlobal.current = fallback
     }
 
-    if (isFirst) {
+    if (hasNoData) {
       setCoinsLoading(false)
       setGlobalLoading(false)
-      isFirstFetch.current = false
     }
   }, [currency])
 
@@ -74,7 +76,9 @@ export function CryptoDataProvider({ children }) {
       setFearGreed(result)
       staleFearGreed.current = result
     } catch {
-      setFearGreed(staleFearGreed.current || mockFearGreed)
+      const fallback = staleFearGreed.current || mockFearGreed
+      setFearGreed(fallback)
+      staleFearGreed.current = fallback
     } finally {
       setFearGreedLoading(false)
     }
@@ -82,7 +86,6 @@ export function CryptoDataProvider({ children }) {
 
   // Coins + Global: fetch on mount + poll every 2min + refetch on currency change
   useEffect(() => {
-    isFirstFetch.current = true
     loadCoinsAndGlobal()
     const interval = setInterval(loadCoinsAndGlobal, POLLING_INTERVALS.CRYPTO_MARKETS)
     return () => clearInterval(interval)
