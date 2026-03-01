@@ -16,7 +16,8 @@ export default function PortfolioInput() {
   const handleAdd = () => {
     const qty = parseFloat(quantity)
     if (!qty || qty <= 0) return
-    addHolding(selectedCoin, qty)
+    const meta = cryptoMeta[selectedCoin]
+    addHolding(selectedCoin, meta?.ticker || selectedCoin.toUpperCase(), qty, 'other')
     setQuantity('')
   }
 

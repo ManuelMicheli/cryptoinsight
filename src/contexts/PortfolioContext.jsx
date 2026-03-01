@@ -6,7 +6,10 @@ const STORAGE_KEY = 'manual_portfolio'
 function loadFromStorage() {
   try {
     const stored = JSON.parse(localStorage.getItem(STORAGE_KEY))
-    if (Array.isArray(stored)) return stored
+    if (Array.isArray(stored)) {
+      // Sanitize: drop malformed entries (e.g. missing quantity from old API)
+      return stored.filter(h => h && typeof h.coinId === 'string' && typeof h.quantity === 'number' && h.quantity > 0)
+    }
   } catch {}
   return []
 }
