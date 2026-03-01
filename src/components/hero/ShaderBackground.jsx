@@ -129,7 +129,7 @@ class WebGLRenderer {
 
   updateScale(scale) {
     this.scale = scale;
-    this.gl.viewport(0, 0, this.canvas.width * scale, this.canvas.height * scale);
+    if (this.gl) this.gl.viewport(0, 0, this.canvas.width * scale, this.canvas.height * scale);
   }
 
   compile(shader, source) {
@@ -144,6 +144,7 @@ class WebGLRenderer {
   test(source) {
     let result = null;
     const gl = this.gl;
+    if (!gl) return 'WebGL2 not supported';
     const shader = gl.createShader(gl.FRAGMENT_SHADER);
     gl.shaderSource(shader, source);
     gl.compileShader(shader);
@@ -156,6 +157,7 @@ class WebGLRenderer {
 
   reset() {
     const gl = this.gl;
+    if (!gl) return;
     if (this.program && !gl.getProgramParameter(this.program, gl.DELETE_STATUS)) {
       if (this.vs) {
         gl.detachShader(this.program, this.vs);
@@ -171,6 +173,7 @@ class WebGLRenderer {
 
   setup() {
     const gl = this.gl;
+    if (!gl) return;
     this.vs = gl.createShader(gl.VERTEX_SHADER);
     this.fs = gl.createShader(gl.FRAGMENT_SHADER);
     this.compile(this.vs, vertexSrc);
@@ -186,6 +189,7 @@ class WebGLRenderer {
 
   init() {
     const gl = this.gl;
+    if (!gl || !this.program) return;
     const program = this.program;
     this.buffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
@@ -207,6 +211,7 @@ class WebGLRenderer {
 
   render(now = 0) {
     const gl = this.gl;
+    if (!gl) return;
     const program = this.program;
     if (!program || gl.getProgramParameter(program, gl.DELETE_STATUS)) return;
     gl.clearColor(0, 0, 0, 1);
