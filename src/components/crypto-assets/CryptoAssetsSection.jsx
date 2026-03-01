@@ -1,9 +1,7 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, lazy, Suspense } from 'react'
 import { useSearchParams } from 'react-router'
 import { AnimatePresence } from 'motion/react'
-import SectionWrapper from '../layout/SectionWrapper'
 import SkeletonLoader from '../ui/SkeletonLoader'
-import VaporizeTextCycle, { Tag } from '../ui/vapour-text-effect'
 import CategoryTabs from './CategoryTabs'
 import CryptoCard from './CryptoCard'
 import DisclaimerBanner from './DisclaimerBanner'
@@ -12,9 +10,9 @@ import { getCurrentFeatured } from '../../data/featuredRotation'
 import { useLanguage } from '../../contexts/LanguageContext'
 import { t } from '../../i18n/translations'
 
-// Lazy import TokenDetailModal to avoid circular deps
-import { lazy, Suspense } from 'react'
+// Lazy imports — VaporizeTextCycle is heavy canvas work, skip on mobile
 const TokenDetailModal = lazy(() => import('../crypto-detail/TokenDetailModal'))
+const VaporizeTextCycle = lazy(() => import('../ui/vapour-text-effect'))
 
 export default function CryptoAssetsSection({ coins, loading }) {
   const [activeCategory, setActiveCategory] = useState('all')
@@ -41,17 +39,13 @@ export default function CryptoAssetsSection({ coins, loading }) {
     setSearchParams({}, { replace: true })
   }
 
-  // VaporizeTextCycle is canvas-based and needs a pixel value (can't use CSS clamp)
-  const [vaporFontSize, setVaporFontSize] = useState(() => {
-    const w = typeof window !== 'undefined' ? window.innerWidth : 1024
-    return w < 640 ? '32px' : w < 1024 ? '48px' : '64px'
-  })
+  // VaporizeTextCycle is canvas-heavy (particles from pixel data) — skip on small screens
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  )
 
   useEffect(() => {
-    const update = () => {
-      const w = window.innerWidth
-      setVaporFontSize(w < 640 ? '32px' : w < 1024 ? '48px' : '64px')
-    }
+    const update = () => setIsMobile(window.innerWidth < 768)
     window.addEventListener('resize', update)
     return () => window.removeEventListener('resize', update)
   }, [])
@@ -71,26 +65,33 @@ export default function CryptoAssetsSection({ coins, loading }) {
     <section id="crypto" className="w-full bg-bg-secondary/30">
       <div className="w-full px-6 md:px-12 lg:px-16 xl:px-20 2xl:px-24 pt-12 md:pt-16 lg:pt-20 pb-6">
         <div className="w-full text-center mb-10 md:mb-12">
-          <h2 className="w-full h-[60px] sm:h-[70px] md:h-[80px] lg:h-[90px] font-heading font-bold text-glow-cyan text-neon-cyan">
-            <VaporizeTextCycle
-              texts={["Crypto", "is", "Cool"]}
-              font={{
-                fontFamily: '"Orbitron", sans-serif',
-                fontSize: vaporFontSize,
-                fontWeight: 700,
-              }}
-              color="rgb(0, 240, 255)"
-              spread={5}
-              density={5}
-              animation={{
-                vaporizeDuration: 2,
-                fadeInDuration: 1,
-                waitDuration: 0.5,
-              }}
-              direction="left-to-right"
-              alignment="center"
-              tag={Tag.P}
-            />
+          <h2 className="w-full font-heading font-bold text-glow-cyan text-neon-cyan">
+            {isMobile ? (
+              <span className="typo-h1">Crypto is Cool</span>
+            ) : (
+              <div className="h-[80px] lg:h-[90px]">
+                <Suspense fallback={<span className="typo-h1">Crypto is Cool</span>}>
+                  <VaporizeTextCycle
+                    texts={["Crypto", "is", "Cool"]}
+                    font={{
+                      fontFamily: '"Orbitron", sans-serif',
+                      fontSize: window.innerWidth < 1024 ? '48px' : '64px',
+                      fontWeight: 700,
+                    }}
+                    color="rgb(0, 240, 255)"
+                    spread={5}
+                    density={5}
+                    animation={{
+                      vaporizeDuration: 2,
+                      fadeInDuration: 1,
+                      waitDuration: 0.5,
+                    }}
+                    direction="left-to-right"
+                    alignment="center"
+                  />
+                </Suspense>
+              </div>
+            )}
           </h2>
           <p className="text-text-secondary typo-body-lg max-w-3xl mx-auto">
             {t('cryptoAssetsSubtitle', lang)}
