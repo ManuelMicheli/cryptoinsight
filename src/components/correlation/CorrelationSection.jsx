@@ -31,7 +31,7 @@ export default function CorrelationSection() {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <div className="panel rounded-xl px-5 py-4 border border-white/5">
+        <div className="panel rounded-xl px-5 py-4 border border-white/5" style={{ minHeight: 'auto' }}>
           <div className="flex gap-3 items-start">
             <span className="text-neon-amber text-lg leading-none mt-0.5">💡</span>
             <p className="text-text-secondary typo-body-sm leading-relaxed">

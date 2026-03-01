@@ -33,7 +33,7 @@ export default function AlertPanel({ onClose }) {
 
   return (
     <motion.div
-      className="absolute right-0 top-full mt-3 w-[380px] max-h-[520px] rounded-2xl border border-white/[0.08] bg-bg-primary/95 backdrop-blur-xl shadow-2xl overflow-hidden z-50"
+      className="absolute right-0 top-full mt-3 w-[380px] max-w-[calc(100vw-2rem)] max-h-[520px] rounded-2xl border border-white/[0.08] bg-bg-primary/95 backdrop-blur-xl shadow-2xl overflow-hidden z-50"
       style={{
         boxShadow: '0 8px 40px rgba(0,0,0,0.4), 0 0 60px rgba(139,92,246,0.05)',
       }}

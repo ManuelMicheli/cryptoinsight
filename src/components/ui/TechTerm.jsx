@@ -12,9 +12,7 @@ export default function TechTerm({ term, children }) {
   const { lang } = useLanguage()
 
   const entry = glossary[term]
-  if (!entry) return children
-
-  const description = entry[lang] || entry.it
+  const description = entry ? (entry[lang] || entry.it) : null
 
   const toggle = useCallback((e) => {
     e.stopPropagation()
@@ -73,6 +71,8 @@ export default function TechTerm({ term, children }) {
     document.addEventListener('keydown', handler)
     return () => document.removeEventListener('keydown', handler)
   }, [open])
+
+  if (!entry) return children
 
   return (
     <span className="tech-term-wrapper">

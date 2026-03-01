@@ -11,6 +11,7 @@ export default function WhaleAlert({ transaction }) {
   return (
     <motion.div
       className="panel panel-purple animate-glow-pulse mb-6 p-4 flex items-center gap-4"
+      style={{ minHeight: 'auto' }}
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}

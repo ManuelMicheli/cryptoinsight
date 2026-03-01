@@ -54,6 +54,9 @@ export function PaletteCycleProvider({ children }) {
     '/eventi':  { primary: '#f59e0b', secondary: '#f59e0b', mid: '#fbbf24' },
     '/news':    { primary: '#8b5cf6', secondary: '#8b5cf6', mid: '#a78bfa' },
     '/social':  { primary: '#ec4899', secondary: '#ec4899', mid: '#f472b6' },
+    '/intelligence': { primary: '#00f0ff', secondary: '#8b5cf6', mid: '#7cb8ff' },
+    '/strumenti':    { primary: '#f59e0b', secondary: '#ff6a00', mid: '#fbbf24' },
+    '/regolamentazione': { primary: '#ef4444', secondary: '#f97316', mid: '#f87171' },
   }
 
   const ROUTE_SHADER = {
@@ -66,6 +69,14 @@ export function PaletteCycleProvider({ children }) {
       tintBottom: [0.96, 0.45, 0.71],
       fogColor: [0.18, 0.04, 0.12],
       oscFreq: [2.8, 1.6, 2.2],
+    },
+    '/intelligence': PALETTES[1].shader,
+    '/strumenti':    PALETTES[3].shader,
+    '/regolamentazione': {
+      tintTop: [0.94, 0.27, 0.27],
+      tintBottom: [0.97, 0.45, 0.10],
+      fogColor: [0.15, 0.04, 0.04],
+      oscFreq: [2.5, 1.8, 2.0],
     },
   }
 

@@ -17,6 +17,7 @@ export default function Toast({ message, type = 'info', onDismiss, duration = 40
   return (
     <motion.div
       className={`panel p-4 rounded-xl border-l-4 ${colors[type] || colors.info} max-w-[360px] shadow-xl`}
+      style={{ minHeight: 'auto' }}
       initial={{ opacity: 0, x: 60, scale: 0.9 }}
       animate={{ opacity: 1, x: 0, scale: 1 }}
       exit={{ opacity: 0, x: 60, scale: 0.9 }}

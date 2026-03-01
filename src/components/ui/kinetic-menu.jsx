@@ -166,7 +166,10 @@ export default function KineticMenu({ isOpen, onClose }) {
       }
     }, containerRef)
 
-    return () => ctx.revert()
+    return () => {
+      document.body.style.overflow = ''
+      ctx.revert()
+    }
   }, [isOpen])
 
   // Escape

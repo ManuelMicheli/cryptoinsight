@@ -38,7 +38,7 @@ export default function SentimentFactorBar({ factorKey, value }) {
 
       {/* Tooltip */}
       {showTooltip && description && (
-        <div className="absolute z-20 bottom-full left-0 mb-2 p-3 panel text-xs text-text-secondary max-w-[250px] rounded-xl">
+        <div className="absolute z-20 bottom-full left-0 mb-2 p-3 panel text-xs text-text-secondary max-w-[250px] rounded-xl" style={{ minHeight: 'auto' }}>
           {description}
         </div>
       )}

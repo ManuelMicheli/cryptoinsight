@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { motion, useSpring, useTransform } from 'motion/react'
 import { useLanguage } from '../../contexts/LanguageContext'
 import { t } from '../../i18n/translations'
@@ -24,9 +25,9 @@ export default function FearGreedGauge({ value = 50, classification = 'Neutral' 
   const springValue = useSpring(0, { stiffness: 50, damping: 20 })
   const rotation = useTransform(springValue, [0, 100], [-90, 90])
 
-  if (typeof window !== 'undefined') {
+  useEffect(() => {
     springValue.set(value)
-  }
+  }, [value, springValue])
 
   const color = getColor(value)
   const labelKey = classificationMap[classification] || 'neutral'

@@ -81,6 +81,7 @@ class WebGLRenderer {
     this.canvas = canvas;
     this.scale = scale;
     this.gl = canvas.getContext('webgl2');
+    if (!this.gl) return;
     this.gl.viewport(0, 0, canvas.width * scale, canvas.height * scale);
     this.shaderSource = defaultShaderSource;
     this.program = null;

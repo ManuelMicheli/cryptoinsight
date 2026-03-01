@@ -131,7 +131,7 @@ function createParticles(ctx, canvas, text, textX, textY, font, color, alignment
   const data = imageData.data
 
   const baseDPR = 3
-  const currentDPR = canvas.width / parseInt(canvas.style.width)
+  const currentDPR = parseInt(canvas.style.width) ? canvas.width / parseInt(canvas.style.width) : (window.devicePixelRatio * 1.5 || 1)
   const baseSampleRate = Math.max(1, Math.round(currentDPR / baseDPR))
   const sampleRate = Math.max(1, Math.round(baseSampleRate))
 

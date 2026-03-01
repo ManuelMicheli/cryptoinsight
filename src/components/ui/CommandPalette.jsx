@@ -88,7 +88,7 @@ export default function CommandPalette({ isOpen, onClose }) {
 
           {/* Palette */}
           <motion.div
-            className="fixed top-[20%] left-1/2 z-50 w-full max-w-[520px] -translate-x-1/2"
+            className="fixed top-[20%] left-1/2 z-50 w-full max-w-[520px] -translate-x-1/2 px-4 sm:px-0"
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}

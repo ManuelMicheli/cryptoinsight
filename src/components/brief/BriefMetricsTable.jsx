@@ -43,6 +43,7 @@ export default function BriefMetricsTable({ metrics, lang }) {
           <div
             key={row.label}
             className="panel panel-dark p-4 text-center space-y-2"
+            style={{ minHeight: 'auto' }}
           >
             <p className="text-text-secondary/60 text-xs font-body uppercase tracking-wider">
               {row.label}
