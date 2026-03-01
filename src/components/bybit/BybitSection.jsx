@@ -130,7 +130,7 @@ export default function BybitSection() {
                           autoFocus
                         />
                       </div>
-                      <div className="max-h-56 overflow-y-auto">
+                      <div className="max-h-56 overflow-y-auto" data-lenis-prevent>
                         {filteredCoins.map(coin => (
                           <button
                             key={coin.id}

@@ -35,7 +35,7 @@ const panelVariants = {
 export default function TokenDetailModal({ coin, isOpen, onClose }) {
   const { lang } = useLanguage()
 
-  // Lock body scroll when modal is open
+  // Lock body scroll & pause Lenis when modal is open
   useEffect(() => {
     if (isOpen) {
       const scrollY = window.scrollY
@@ -43,6 +43,7 @@ export default function TokenDetailModal({ coin, isOpen, onClose }) {
       document.body.style.top = `-${scrollY}px`
       document.body.style.width = '100%'
       document.body.style.overflow = 'hidden'
+      window.__lenis?.stop()
 
       return () => {
         document.body.style.position = ''
@@ -50,6 +51,7 @@ export default function TokenDetailModal({ coin, isOpen, onClose }) {
         document.body.style.width = ''
         document.body.style.overflow = ''
         window.scrollTo(0, scrollY)
+        window.__lenis?.start()
       }
     }
   }, [isOpen])
@@ -91,6 +93,7 @@ export default function TokenDetailModal({ coin, isOpen, onClose }) {
           {/* Panel */}
           <motion.div
             className="relative w-full max-w-[92vw] 2xl:max-w-[88vw] max-h-[90vh] overflow-y-auto rounded-3xl glass border border-white/10"
+            data-lenis-prevent
             style={{
               background: 'linear-gradient(145deg, rgba(10,10,15,0.97), rgba(18,18,26,0.95))',
               boxShadow:

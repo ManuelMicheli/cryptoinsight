@@ -82,7 +82,7 @@ export default function AlertPanel({ onClose }) {
       </div>
 
       {/* Content */}
-      <div className="overflow-y-auto max-h-[380px] scrollbar-hide">
+      <div className="overflow-y-auto max-h-[380px] scrollbar-hide" data-lenis-prevent>
         {activeTab === 'alerts' ? (
           <div className="p-4 space-y-3">
             {/* Create new alert toggle */}

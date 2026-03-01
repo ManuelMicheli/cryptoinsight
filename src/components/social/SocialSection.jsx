@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react'
 import { motion } from 'motion/react'
 import SectionWrapper from '../layout/SectionWrapper'
 import SectionHeading from '../ui/SectionHeading'
-import VideoCard from './VideoCard'
+import FeedPost from './FeedPost'
 import CreatorCard from './CreatorCard'
 import PredictionCard from './PredictionCard'
 import PredictionLeaderboard from './PredictionLeaderboard'
@@ -114,34 +114,26 @@ export default function SocialSection() {
 
       {/* ═══ Tab Content ═══ */}
 
-      {/* All — Chronological video feed */}
+      {/* All — Chronological feed (X/Twitter style) */}
       {activeTab === 'all' && (
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.05 }}
-        >
-          {filteredVideos.map(video => (
-            <VideoCard key={video.id} video={video} />
-          ))}
-        </motion.div>
+        <div className="max-w-2xl mx-auto">
+          <div className="divide-y divide-white/5">
+            {filteredVideos.map(video => (
+              <FeedPost key={video.id} video={video} />
+            ))}
+          </div>
+        </div>
       )}
 
-      {/* Most Viewed */}
+      {/* Most Viewed — Feed (X/Twitter style) */}
       {activeTab === 'most-viewed' && (
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.05 }}
-        >
-          {mostViewed.map(video => (
-            <VideoCard key={video.id} video={video} />
-          ))}
-        </motion.div>
+        <div className="max-w-2xl mx-auto">
+          <div className="divide-y divide-white/5">
+            {mostViewed.map(video => (
+              <FeedPost key={video.id} video={video} />
+            ))}
+          </div>
+        </div>
       )}
 
       {/* Most Influential (Creator cards) */}

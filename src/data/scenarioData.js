@@ -1,5 +1,6 @@
 // Beta coefficients (correlation to BTC) — model parameters, not live data
 export const scenarioBetas = {
+  bitcoin: 1.0,
   ethereum: 1.15,
   solana: 1.45,
   cardano: 1.25,

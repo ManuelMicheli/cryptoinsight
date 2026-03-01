@@ -66,7 +66,7 @@ export default function ScenarioResults({ params, baseline }) {
   }, [params, baseline, holdings, livePriceMap])
 
   return (
-    <div className="panel rounded-2xl overflow-x-auto" style={{ minHeight: 'auto' }}>
+    <div className="panel rounded-2xl overflow-x-auto" style={{ minHeight: 'auto' }} data-lenis-prevent>
       <div className="min-w-[420px]">
       {/* Table header */}
       <div className="grid grid-cols-4 gap-2 px-4 py-3 border-b border-white/10 text-text-secondary text-xs font-medium">

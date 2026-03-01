@@ -73,12 +73,12 @@ export default function CreatorCard({ creator }) {
         {creatorVideos.length > 0 && (
           <div className="mt-auto pt-3 border-t border-white/5 space-y-2">
             {creatorVideos.map(v => (
-              <div key={v.id} className="flex items-center gap-2 group/vid">
+              <a key={v.id} href={v.videoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 group/vid">
                 <PlatformIcon platform={v.platform} size={12} className="text-text-secondary flex-shrink-0" />
                 <span className="typo-micro text-text-secondary truncate group-hover/vid:text-text-primary transition-colors">
                   {l(v.title, lang)}
                 </span>
-              </div>
+              </a>
             ))}
           </div>
         )}

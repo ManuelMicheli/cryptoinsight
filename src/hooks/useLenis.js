@@ -15,6 +15,7 @@ export function useLenis() {
     })
 
     lenisRef.current = lenis
+    window.__lenis = lenis
 
     let frameId
     function raf(time) {
@@ -28,6 +29,7 @@ export function useLenis() {
       cancelAnimationFrame(frameId)
       lenis.destroy()
       lenisRef.current = null
+      window.__lenis = null
     }
   }, [])
 

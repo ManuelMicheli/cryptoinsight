@@ -46,7 +46,8 @@ export default function VideoCard({ video }) {
 
   return (
     <motion.div variants={fadeInUp}>
-      <GlassCard variant="dark" className="flex flex-col h-full relative overflow-hidden group">
+      <a href={video.videoUrl} target="_blank" rel="noopener noreferrer" className="block h-full">
+      <GlassCard variant="dark" className="flex flex-col h-full relative overflow-hidden group cursor-pointer">
         {/* Top accent line */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-rose/30 to-transparent" />
 
@@ -58,6 +59,13 @@ export default function VideoCard({ video }) {
               alt={l(video.title, lang)}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               loading="lazy"
+              onError={(e) => {
+                if (e.target.src.includes('maxresdefault')) {
+                  e.target.src = e.target.src.replace('maxresdefault', 'hqdefault')
+                } else if (e.target.src.includes('hqdefault')) {
+                  e.target.src = e.target.src.replace('hqdefault', 'mqdefault')
+                }
+              }}
             />
             {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -130,6 +138,7 @@ export default function VideoCard({ video }) {
           </span>
         </div>
       </GlassCard>
+      </a>
     </motion.div>
   )
 }

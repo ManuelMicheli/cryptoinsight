@@ -113,7 +113,7 @@ export default function CommandPalette({ isOpen, onClose }) {
               </div>
 
               {/* Results */}
-              <div className="max-h-[300px] overflow-y-auto py-2">
+              <div className="max-h-[300px] overflow-y-auto py-2" data-lenis-prevent>
                 {results.map((item, i) => (
                   <button
                     key={`${item.path}-${item.label[lang]}-${i}`}

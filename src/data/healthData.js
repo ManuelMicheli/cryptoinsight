@@ -6,6 +6,22 @@ const commits = (base, growth) =>
 
 export const healthData = {
   // ─── LAYER 1 ──────────────────────────────────────────────
+  bitcoin: {
+    grade: 'A+',
+    score: 98,
+    github: { commits90d: commits(50, 2), contributorsActive: 350, issuesRatio: 0.94 },
+    security: {
+      audits: [
+        { name: 'Bitcoin Core 27.0', date: '2026-01', auditor: 'Chaincode Labs' },
+        { name: 'Taproot Assets', date: '2025-10', auditor: 'Trail of Bits' },
+        { name: 'Lightning Network', date: '2025-07', auditor: 'Block Inc' },
+      ],
+      vulnerabilities: 0,
+    },
+    onchain: { tvl: null, dailyTx: 450000, activeAddresses: 950000 },
+    team: { size: 500, lastRoadmapUpdate: '2026-02-20', deliveryRate: 92 },
+    badges: ['activelyDeveloped', 'auditVerified'],
+  },
   ethereum: {
     grade: 'A+',
     score: 97,

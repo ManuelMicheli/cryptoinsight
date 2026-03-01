@@ -93,6 +93,7 @@ function DetailPanel({ country, onClose }) {
       exit={{ opacity: 0, x: 40 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       className="panel panel-dark border-l-2 border-neon-cyan/30 overflow-y-auto"
+      data-lenis-prevent
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-6">

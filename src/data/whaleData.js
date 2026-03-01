@@ -3,6 +3,28 @@
 
 export const whaleTransactions = [
   {
+    id: 19,
+    walletLabel: 'MicroStrategy',
+    amount: 500,
+    asset: 'bitcoin',
+    ticker: 'BTC',
+    valueUsd: 48500000,
+    destination: { it: 'Cold Wallet', en: 'Cold Wallet' },
+    type: 'accumulo',
+    timestamp: '2026-02-28T19:15:00Z',
+  },
+  {
+    id: 20,
+    walletLabel: 'Whale #a3f7',
+    amount: 200,
+    asset: 'bitcoin',
+    ticker: 'BTC',
+    valueUsd: 19400000,
+    destination: { it: 'Coinbase Prime', en: 'Coinbase Prime' },
+    type: 'distribuzione',
+    timestamp: '2026-02-28T18:45:00Z',
+  },
+  {
     id: 1,
     walletLabel: 'Whale #1284',
     amount: 15000,

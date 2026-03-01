@@ -6,6 +6,12 @@ const trend = (start, end, days) =>
 
 export const sentimentData = {
   // ─── LAYER 1 ──────────────────────────────────────────────
+  bitcoin: {
+    score: 78,
+    trend7d: [70, 72, 73, 75, 76, 77, 78],
+    trend30d: trend(60, 78, 30),
+    factors: { socialVolume: 85, fundingRate: 72, longShortRatio: 75, exchangeFlow: 74, volumeChange: 82 },
+  },
   ethereum: {
     score: 72,
     trend7d: [65, 67, 68, 70, 69, 71, 72],

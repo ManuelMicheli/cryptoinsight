@@ -38,7 +38,7 @@ export default function CorrelationMatrix({ timeframe }) {
       viewport={{ once: true }}
     >
       {/* Scrollable container for mobile */}
-      <div className="overflow-x-auto -mx-2 px-2 snap-x snap-mandatory">
+      <div className="overflow-x-auto -mx-2 px-2 snap-x snap-mandatory" data-lenis-prevent>
         <div style={{ minWidth: '650px' }}>
           {/* Header row */}
           <div className="grid gap-px" style={{ gridTemplateColumns: `60px repeat(${correlationAssets.length}, 1fr)` }}>

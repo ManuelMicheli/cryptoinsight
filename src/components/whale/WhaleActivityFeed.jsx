@@ -6,6 +6,7 @@ export default function WhaleActivityFeed({ transactions }) {
   return (
     <motion.div
       className="max-h-[600px] overflow-y-auto space-y-3 pr-1 scrollbar-thin"
+      data-lenis-prevent
       variants={staggerContainer}
       initial="hidden"
       whileInView="visible"
