@@ -16,7 +16,7 @@ const TokenDetailModal = lazy(() => import('../crypto-detail/TokenDetailModal'))
 const VaporizeTextCycle = lazy(() => import('../ui/vapour-text-effect'))
 
 // Pin order: ETH first, then BTC, then by market cap
-const PIN_ORDER = ['ethereum', 'bitcoin']
+const PIN_ORDER = ['bitcoin', 'ethereum']
 
 export default function CryptoAssetsSection({ coins, loading }) {
   const [activeCategory, setActiveCategory] = useState('all')
