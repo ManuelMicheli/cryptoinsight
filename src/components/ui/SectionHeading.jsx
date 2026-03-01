@@ -7,6 +7,7 @@ export default function SectionHeading({ title, subtitle, glowColor = 'cyan' }) 
     purple: 'text-glow-purple text-neon-purple',
     green: 'text-glow-green text-neon-green',
     amber: 'text-glow-amber text-neon-amber',
+    rose: 'text-glow-rose text-neon-rose',
   }[glowColor] || 'text-glow-cyan text-neon-cyan'
 
   return (

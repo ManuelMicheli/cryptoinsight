@@ -30,6 +30,11 @@ const SECTION_COLORS = {
     secondary: '#a78bfa',
     panelGradient: 'linear-gradient(135deg, #150a28 0%, #1a0a2e 50%, #1f0d38 100%)',
   },
+  '/social': {
+    primary: '#ec4899',
+    secondary: '#f472b6',
+    panelGradient: 'linear-gradient(135deg, #1e0a18 0%, #2e0a1e 50%, #380d28 100%)',
+  },
 }
 
 const NAV_ITEMS = [
@@ -78,6 +83,18 @@ const NAV_ITEMS = [
         <line x1="10" y1="6" x2="18" y2="6" />
         <line x1="10" y1="10" x2="18" y2="10" />
         <line x1="10" y1="14" x2="14" y2="14" />
+      </svg>
+    ),
+  },
+  {
+    path: '/social',
+    labelKey: 'navSocial',
+    descKey: 'previewSocialDesc',
+    icon: (color) => (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 2h4v4M15 9l6.1-6.1M9 22H5a2 2 0 01-2-2V4a2 2 0 012-2h4" />
+        <circle cx="12" cy="14" r="3" />
+        <path d="M6.3 17.7a6 6 0 0111.4 0" />
       </svg>
     ),
   },

@@ -49,6 +49,7 @@ export default function Navbar() {
     ['/mercato', t('navMarket', lang)],
     ['/eventi', t('navEvents', lang)],
     ['/news', t('navNews', lang)],
+    ['/social', t('navSocial', lang)],
   ]
 
   const moreNavItems = [

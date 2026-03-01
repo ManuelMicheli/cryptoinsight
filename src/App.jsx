@@ -7,6 +7,7 @@ import EventsPage from './pages/EventsPage'
 import NewsPage from './pages/NewsPage'
 import IntelligencePage from './pages/IntelligencePage'
 import StrumentiPage from './pages/StrumentiPage'
+import SocialPage from './pages/SocialPage'
 import RegolamentazionePage from './pages/RegolamentazionePage'
 import NotFoundPage from './pages/NotFoundPage'
 
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="mercato" element={<MarketPage />} />
         <Route path="eventi" element={<EventsPage />} />
         <Route path="news" element={<NewsPage />} />
+        <Route path="social" element={<SocialPage />} />
         <Route path="intelligence" element={<IntelligencePage />} />
         <Route path="strumenti" element={<StrumentiPage />} />
         <Route path="regolamentazione" element={<RegolamentazionePage />} />

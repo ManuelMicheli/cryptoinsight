@@ -18,6 +18,7 @@ export default function GlassCard({ children, className = '', hover = true, vari
         green: 'panel panel-green',
         amber: 'panel panel-amber',
         dark: 'panel panel-dark',
+        rose: 'panel panel-rose',
       }[variant] || 'panel')
 
   let brandStyle = {}
@@ -39,6 +40,7 @@ export default function GlassCard({ children, className = '', hover = true, vari
       green: '0 8px 40px rgba(0,255,136,0.2), 0 0 60px rgba(0,255,136,0.08)',
       amber: '0 8px 40px rgba(245,158,11,0.2), 0 0 60px rgba(245,158,11,0.08)',
       dark: '0 8px 40px rgba(255,255,255,0.04), 0 0 60px rgba(255,255,255,0.02)',
+      rose: '0 8px 40px rgba(236,72,153,0.2), 0 0 60px rgba(236,72,153,0.08)',
     }[variant] || '0 8px 40px rgba(0,240,255,0.2), 0 0 60px rgba(0,240,255,0.08)'
   }
 

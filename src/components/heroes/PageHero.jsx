@@ -95,6 +95,21 @@ const THEMES = {
     accentColor: 'text-glow-green text-neon-green',
     useMeshGradient: true,
   },
+  social: {
+    colors: ['#2e0a1e', '#3a0d28', '#ec4899', '#f472b6'],
+    meshColors: ['#2e0a1e', '#3a0d28', '#ec4899', '#f472b6'],
+    backgroundColor: '#2e0a1e',
+    shader: {
+      tintTop: [0.93, 0.28, 0.60],
+      tintBottom: [0.96, 0.45, 0.71],
+      fogColor: [0.18, 0.04, 0.12],
+      oscFreq: [2.8, 1.6, 2.2],
+    },
+    titleColor: 'text-neon-rose',
+    glowClass: 'text-glow-rose',
+    accentColor: 'text-glow-rose text-neon-rose',
+    useMeshGradient: true,
+  },
   regolamentazione: {
     colors: ['#1a1000', '#2e1c00', '#f59e0b', '#ef4444'],
     meshColors: ['#1a1000', '#2e1c00', '#f59e0b', '#ef4444'],
