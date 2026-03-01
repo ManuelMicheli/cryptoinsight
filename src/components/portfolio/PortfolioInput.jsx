@@ -40,7 +40,7 @@ export default function PortfolioInput() {
           placeholder={lang === 'it' ? 'Quantita\'' : 'Quantity'}
           min="0"
           step="any"
-          className="panel px-3 py-2 text-sm text-text-primary bg-transparent border border-glass-border rounded-xl focus:outline-none focus:border-neon-purple/40 w-[120px]"
+          className="panel px-3 py-2 text-sm text-text-primary bg-transparent border border-glass-border rounded-xl focus:outline-none focus:border-neon-purple/40 w-[100px] sm:w-[120px]"
         />
         <button
           onClick={handleAdd}

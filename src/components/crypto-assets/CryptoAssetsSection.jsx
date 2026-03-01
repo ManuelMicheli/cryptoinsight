@@ -61,7 +61,7 @@ export default function CryptoAssetsSection({ coins, loading }) {
               texts={["Crypto", "is", "Cool"]}
               font={{
                 fontFamily: '"Orbitron", sans-serif',
-                fontSize: "64px",
+                fontSize: "clamp(2rem, 5vw + 1rem, 4rem)",
                 fontWeight: 700,
               }}
               color="rgb(0, 240, 255)"
@@ -87,7 +87,7 @@ export default function CryptoAssetsSection({ coins, loading }) {
 
       <div className="w-full px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20">
         {loading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 lg:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 lg:gap-5">
             {Array.from({ length: 6 }, (_, i) => (
               <div key={i} className="panel">
                 <SkeletonLoader lines={4} />
@@ -95,7 +95,7 @@ export default function CryptoAssetsSection({ coins, loading }) {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 lg:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 lg:gap-5">
             <AnimatePresence mode="popLayout">
               {filtered.map((coin) => (
                 <CryptoCard key={coin.id} coin={coin} onClick={() => handleOpenDetail(coin)} />

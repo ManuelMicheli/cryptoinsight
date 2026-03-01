@@ -11,7 +11,7 @@ export default function SectionWrapper({ id, children, className = '' }) {
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
     >
-      <div className="w-full px-6 md:px-12 lg:px-16 xl:px-20 2xl:px-24 py-12 md:py-16 lg:py-20">
+      <div className="w-full px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20 2xl:px-24 py-8 md:py-12 lg:py-16">
         {children}
       </div>
     </motion.section>

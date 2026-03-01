@@ -10,8 +10,8 @@ export default function NewsSection() {
 
   return (
     <SectionWrapper id="news">
-      <div className="flex items-center justify-between mb-10">
-        <div>
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-8 md:mb-10">
+        <div className="min-w-0">
           <h2
             className="font-heading typo-h1 font-bold text-glow-purple text-neon-purple mb-2"
           >

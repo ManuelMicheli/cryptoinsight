@@ -91,7 +91,7 @@ export default function SocialSection() {
 
       {/* Platform filter (for video tabs) */}
       {(activeTab === 'all' || activeTab === 'most-viewed') && (
-        <div className="flex items-center justify-center gap-2 mb-8">
+        <div className="flex items-center justify-center gap-2 mb-8 flex-wrap">
           {platforms.map(p => {
             const isActive = platformFilter === p
             const label = p === 'all' ? t('socialFilterAll', lang) : p === 'youtube' ? 'YouTube' : p === 'x' ? 'X' : 'TikTok'

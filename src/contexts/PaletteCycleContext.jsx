@@ -53,6 +53,7 @@ export function PaletteCycleProvider({ children }) {
     '/mercato': { primary: '#00ff88', secondary: '#00ff88', mid: '#00f8c0' },
     '/eventi':  { primary: '#f59e0b', secondary: '#f59e0b', mid: '#fbbf24' },
     '/news':    { primary: '#8b5cf6', secondary: '#8b5cf6', mid: '#a78bfa' },
+    '/social':  { primary: '#ec4899', secondary: '#ec4899', mid: '#f472b6' },
   }
 
   const ROUTE_SHADER = {
@@ -60,6 +61,12 @@ export function PaletteCycleProvider({ children }) {
     '/mercato': PALETTES[2].shader,
     '/eventi':  PALETTES[0].shader,
     '/news':    PALETTES[3].shader,
+    '/social':  {
+      tintTop: [0.93, 0.28, 0.60],
+      tintBottom: [0.96, 0.45, 0.71],
+      fogColor: [0.18, 0.04, 0.12],
+      oscFreq: [2.8, 1.6, 2.2],
+    },
   }
 
   useEffect(() => {

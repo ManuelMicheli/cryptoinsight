@@ -11,6 +11,7 @@ const pages = [
   { path: '/mercato', label: { it: 'Mercato', en: 'Market' } },
   { path: '/eventi', label: { it: 'Eventi', en: 'Events' } },
   { path: '/news', label: { it: 'News', en: 'News' } },
+  { path: '/social', label: { it: 'Social', en: 'Social' } },
   { path: '/intelligence', label: { it: 'Intelligence', en: 'Intelligence' } },
   { path: '/strumenti', label: { it: 'Strumenti', en: 'Tools' } },
   { path: '/regolamentazione', label: { it: 'Regolamentazione', en: 'Regulation' } },

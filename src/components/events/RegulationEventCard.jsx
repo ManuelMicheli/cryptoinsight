@@ -21,9 +21,9 @@ export default function RegulationEventCard({ regulation }) {
   const year = dateObj.getFullYear()
 
   return (
-    <motion.div variants={fadeInUp} className="flex gap-4 md:gap-6">
+    <motion.div variants={fadeInUp} className="flex gap-3 md:gap-6">
       {/* Date */}
-      <div className="flex-shrink-0 w-20 md:w-24 text-center pt-2">
+      <div className="flex-shrink-0 w-16 md:w-24 text-center pt-2">
         {day ? (
           <div className="font-heading typo-stat font-bold text-neon-cyan">
             {day}
@@ -44,8 +44,8 @@ export default function RegulationEventCard({ regulation }) {
         style={{ minHeight: 'auto' }}
       >
         {/* Header: Flag + Country + Impact */}
-        <div className="flex items-start justify-between gap-4 mb-3">
-          <div className="flex items-center gap-2">
+        <div className="flex items-start justify-between gap-2 md:gap-4 mb-3 flex-wrap">
+          <div className="flex items-center gap-2 min-w-0">
             {regulation.flag && (
               <span className="text-xl" role="img" aria-label={l(regulation.countryName, lang)}>
                 {regulation.flag}

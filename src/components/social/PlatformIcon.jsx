@@ -1,5 +1,5 @@
-export default function PlatformIcon({ platform, size = 16, className = '' }) {
-  const props = { width: size, height: size, viewBox: '0 0 24 24', fill: 'currentColor', className }
+export default function PlatformIcon({ platform, size = 16, className = '', style }) {
+  const props = { width: size, height: size, viewBox: '0 0 24 24', fill: 'currentColor', className, style }
 
   if (platform === 'youtube') {
     return (

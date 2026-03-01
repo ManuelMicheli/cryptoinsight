@@ -7,12 +7,12 @@ export default function CategoryTabs({ active, onChange }) {
   const { lang } = useLanguage()
 
   return (
-    <div className="flex flex-wrap justify-center gap-3 mb-10">
+    <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 md:mb-10">
       {Object.entries(CATEGORIES).map(([key, labelKey]) => (
         <button
           key={key}
           onClick={() => onChange(key)}
-          className={`relative px-6 py-2.5 rounded-xl typo-ui font-medium transition-colors ${
+          className={`relative px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl typo-ui font-medium transition-colors ${
             active === key ? 'text-neon-cyan' : 'text-text-secondary hover:text-text-primary'
           }`}
         >

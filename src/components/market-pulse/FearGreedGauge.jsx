@@ -33,7 +33,7 @@ export default function FearGreedGauge({ value = 50, classification = 'Neutral' 
 
   return (
     <div className="flex flex-col items-center">
-      <div className="relative w-48 h-28 overflow-hidden">
+      <div className="relative w-full max-w-48 h-28 overflow-hidden mx-auto">
         <svg viewBox="0 0 200 110" className="w-full h-full">
           {/* Background arc */}
           <path

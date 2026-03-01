@@ -66,7 +66,8 @@ export default function ScenarioResults({ params, baseline }) {
   }, [params, baseline, holdings, livePriceMap])
 
   return (
-    <div className="panel rounded-2xl overflow-hidden">
+    <div className="panel rounded-2xl overflow-hidden overflow-x-auto">
+      <div className="min-w-[420px]">
       {/* Table header */}
       <div className="grid grid-cols-4 gap-2 px-4 py-3 border-b border-white/10 text-text-secondary text-xs font-medium">
         <span>Token</span>
@@ -101,6 +102,7 @@ export default function ScenarioResults({ params, baseline }) {
           </motion.div>
         ))}
       </AnimatePresence>
+      </div>
     </div>
   )
 }

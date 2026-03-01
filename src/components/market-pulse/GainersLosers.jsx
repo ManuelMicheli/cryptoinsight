@@ -14,13 +14,13 @@ export default function GainersLosers({ coins }) {
   const losers = sorted.slice(-5).reverse()
 
   const CoinRow = ({ coin, colorClass }) => (
-    <div className="flex items-center justify-between py-3 border-b border-white/[0.04] last:border-b-0">
-      <div className="flex items-center gap-3">
-        <img src={coin.image} alt={coin.name} className="w-7 h-7 rounded-full ring-1 ring-white/10" />
-        <span className="typo-body-sm font-semibold text-text-primary">{coin.symbol?.toUpperCase()}</span>
+    <div className="flex items-center justify-between py-3 border-b border-white/[0.04] last:border-b-0 gap-2">
+      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+        <img src={coin.image} alt={coin.name} className="w-6 h-6 sm:w-7 sm:h-7 rounded-full ring-1 ring-white/10 flex-shrink-0" />
+        <span className="typo-body-sm font-semibold text-text-primary truncate">{coin.symbol?.toUpperCase()}</span>
       </div>
-      <div className="flex items-center gap-4">
-        <span className="typo-body-sm text-text-secondary">{formatCurrency(coin.current_price, 2, currency)}</span>
+      <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+        <span className="typo-body-sm text-text-secondary hidden sm:inline">{formatCurrency(coin.current_price, 2, currency)}</span>
         <span className={`typo-body-sm font-bold ${colorClass}`}>{formatPercentage(coin.price_change_percentage_24h)}</span>
       </div>
     </div>

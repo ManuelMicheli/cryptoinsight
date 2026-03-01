@@ -141,9 +141,9 @@ export default function UnlockEventCard({ unlock }) {
       : `${tokenName} Token Unlock`
 
   return (
-    <motion.div variants={fadeInUp} className="flex gap-4 md:gap-6">
+    <motion.div variants={fadeInUp} className="flex gap-3 md:gap-6">
       {/* Date */}
-      <div className="flex-shrink-0 w-20 md:w-24 text-center pt-2">
+      <div className="flex-shrink-0 w-16 md:w-24 text-center pt-2">
         <div className="font-heading typo-stat font-bold text-neon-purple">
           {day}
         </div>
@@ -158,8 +158,8 @@ export default function UnlockEventCard({ unlock }) {
         style={{ minHeight: 'auto' }}
       >
         {/* Header */}
-        <div className="flex items-start justify-between gap-4 mb-3">
-          <div>
+        <div className="flex items-start justify-between gap-2 md:gap-4 mb-3 flex-wrap">
+          <div className="min-w-0">
             <h4 className="typo-h3 font-semibold text-text-primary">
               <TechTerm term="token_unlock">{title}</TechTerm>
             </h4>

@@ -11,17 +11,17 @@ export default function EventCard({ event }) {
   const month = date.toLocaleDateString(lang === 'it' ? 'it-IT' : 'en-US', { month: 'short' }).toUpperCase()
 
   return (
-    <motion.div variants={fadeInUp} className="flex gap-4 md:gap-6">
+    <motion.div variants={fadeInUp} className="flex gap-3 md:gap-6">
       {/* Date */}
-      <div className="flex-shrink-0 w-20 md:w-24 text-center pt-2">
+      <div className="flex-shrink-0 w-16 md:w-24 text-center pt-2">
         <div className="font-heading typo-stat font-bold text-neon-amber">{day}</div>
         <div className="typo-ui-sm text-text-secondary mt-1 tracking-widest">{month}</div>
       </div>
 
       {/* Content */}
       <div className="panel panel-dark flex-1 border-l-2 border-neon-amber/30" style={{ minHeight: 'auto' }}>
-        <div className="flex items-start justify-between gap-4 mb-3">
-          <h4 className="typo-h3 font-semibold text-text-primary">{l(event.title, lang)}</h4>
+        <div className="flex items-start justify-between gap-2 md:gap-4 mb-3 flex-wrap">
+          <h4 className="typo-h3 font-semibold text-text-primary min-w-0">{l(event.title, lang)}</h4>
           <ImpactBadge impact={event.impact} />
         </div>
         <div className="flex items-center gap-3 mb-4 typo-body-sm text-text-secondary">

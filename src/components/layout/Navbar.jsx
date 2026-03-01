@@ -144,7 +144,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <AlertBell />
 
             {/* Language toggle */}
@@ -175,10 +175,10 @@ export default function Navbar() {
               </span>
             </button>
 
-            {/* Currency toggle */}
+            {/* Currency toggle — hidden on xs */}
             <button
               onClick={toggleCurrency}
-              className="relative flex items-center w-[72px] h-8 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm overflow-hidden transition-colors"
+              className="hidden sm:relative sm:flex items-center w-[72px] h-8 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm overflow-hidden transition-colors"
             >
               <motion.div
                 className="absolute top-0.5 w-[34px] h-7 rounded-full"
