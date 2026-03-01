@@ -1,6 +1,21 @@
 // Static snapshot of CoinGecko data — used as fallback when API is down or during offline dev
 
 export const mockCoins = [
+  // ─── BITCOIN ──────────────────────────────────────────────
+  {
+    id: 'bitcoin',
+    symbol: 'btc',
+    name: 'Bitcoin',
+    image: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png',
+    current_price: 97250.00,
+    market_cap: 1_920_000_000_000,
+    market_cap_rank: 1,
+    total_volume: 38_500_000_000,
+    price_change_percentage_24h_in_currency: 1.85,
+    price_change_percentage_7d_in_currency: 4.2,
+    price_change_percentage_30d_in_currency: 8.7,
+    sparkline_in_7d: { price: Array.from({ length: 168 }, (_, i) => 94000 + Math.sin(i / 12) * 2000 + i * 19) },
+  },
   // ─── LAYER 1 ──────────────────────────────────────────────
   {
     id: 'ethereum',
