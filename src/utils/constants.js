@@ -4,6 +4,7 @@ export const API_URLS = {
 }
 
 export const COIN_IDS = [
+  'bitcoin',
   // Layer 1
   'ethereum', 'solana', 'cardano', 'avalanche-2', 'sui', 'polkadot', 'near', 'aptos', 'cosmos', 'toncoin',
   // Payments

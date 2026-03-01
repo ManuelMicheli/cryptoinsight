@@ -1,4 +1,16 @@
 export const cryptoMeta = {
+  // ─── BITCOIN ──────────────────────────────────────────────
+  bitcoin: {
+    name: 'Bitcoin',
+    ticker: 'BTC',
+    category: 'layer-1',
+    risk: 'low',
+    brandColors: ['#F7931A', '#E28B1A'],
+    description: {
+      it: "La prima e piu' grande criptovaluta per capitalizzazione di mercato, creata nel 2009 da Satoshi Nakamoto. Bitcoin funziona come riserva di valore digitale decentralizzata con un'offerta massima fissata a 21 milioni di unita'. Il meccanismo Proof of Work garantisce la sicurezza della rete, elaborando circa 7 transazioni al secondo sul layer base. L'adozione istituzionale e' accelerata con l'approvazione degli ETF spot nel 2024, mentre Lightning Network abilita pagamenti istantanei a basso costo.",
+      en: "The first and largest cryptocurrency by market capitalization, created in 2009 by Satoshi Nakamoto. Bitcoin functions as a decentralized digital store of value with a maximum supply fixed at 21 million units. The Proof of Work mechanism ensures network security, processing approximately 7 transactions per second on the base layer. Institutional adoption has accelerated with the approval of spot ETFs in 2024, while the Lightning Network enables instant low-cost payments.",
+    },
+  },
   // ─── LAYER 1 ──────────────────────────────────────────────
   ethereum: {
     name: 'Ethereum',
