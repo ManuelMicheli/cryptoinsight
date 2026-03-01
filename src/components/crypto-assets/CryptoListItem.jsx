@@ -4,6 +4,13 @@ import { useCurrency } from '../../contexts/CurrencyContext'
 import { cryptoMeta } from '../../data/cryptoMeta'
 import SparklineChart from './SparklineChart'
 
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1, 3), 16)
+  const g = parseInt(hex.slice(3, 5), 16)
+  const b = parseInt(hex.slice(5, 7), 16)
+  return [r, g, b]
+}
+
 export default function CryptoListItem({ coin, onClick }) {
   const { currency } = useCurrency()
   const meta = cryptoMeta[coin.id] || {}
@@ -12,6 +19,15 @@ export default function CryptoListItem({ coin, onClick }) {
   const sparklineData = coin.sparkline_in_7d?.price || []
   const is7dPositive = (coin.price_change_percentage_7d_in_currency ?? 0) >= 0
 
+  const colors = meta.brandColors || ['#00f0ff', '#00f0ff']
+  const [r1, g1, b1] = hexToRgb(colors[0])
+  const [r2, g2, b2] = hexToRgb(colors[1])
+
+  const brandStyle = {
+    background: `linear-gradient(135deg, rgba(${r1},${g1},${b1}, 0.12), rgba(${r2},${g2},${b2}, 0.04))`,
+    borderColor: `rgba(${r2},${g2},${b2}, 0.15)`,
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -19,7 +35,8 @@ export default function CryptoListItem({ coin, onClick }) {
       exit={{ opacity: 0 }}
       layout
       onClick={onClick}
-      className="flex items-center gap-3 px-3 py-3 rounded-xl bg-white/[0.03] border border-white/[0.06] active:bg-white/[0.06] transition-colors cursor-pointer"
+      className="flex items-center gap-3 px-3 py-3 rounded-xl border active:brightness-125 transition-all cursor-pointer"
+      style={brandStyle}
     >
       {/* Rank */}
       <span className="text-text-secondary/50 typo-micro w-5 text-right flex-shrink-0">
