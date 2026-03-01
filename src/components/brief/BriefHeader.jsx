@@ -21,15 +21,15 @@ export default function BriefHeader({ weekNumber, dateRange, isLatest }) {
       <div className="space-y-2">
         <div className="flex items-center gap-4">
           <h3
-            className="font-heading font-bold text-neon-purple text-glow-purple typo-h2"
+            className="font-heading font-bold text-neon-amber text-glow-amber typo-h2"
           >
             {lang === 'it' ? 'SETTIMANA' : 'WEEK'} {weekNumber}
           </h3>
           {isLatest && (
             <span
-              className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-neon-purple/20 text-neon-purple border border-neon-purple/30"
+              className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-neon-amber/20 text-neon-amber border border-neon-amber/30"
               style={{
-                boxShadow: '0 0 12px rgba(139,92,246,0.3), 0 0 30px rgba(139,92,246,0.1)',
+                boxShadow: '0 0 12px rgba(245,158,11,0.3), 0 0 30px rgba(245,158,11,0.1)',
               }}
             >
               {lang === 'it' ? 'Ultimo' : 'Latest'}

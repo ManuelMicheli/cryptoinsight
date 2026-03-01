@@ -35,7 +35,7 @@ export default function WeeklyBrief() {
       {/* Main brief panel */}
       <motion.div
         key={currentBrief.weekNumber}
-        className="panel panel-purple p-8 md:p-12 space-y-10"
+        className="panel panel-amber p-8 md:p-12 space-y-10"
         variants={fadeInUp}
         initial="hidden"
         animate="visible"

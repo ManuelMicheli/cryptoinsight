@@ -29,9 +29,9 @@ export default function BriefNarrative({ narrative, pullQuote, lang }) {
             {/* Pull quote inserted after the right paragraph */}
             {index === insertQuoteAfter && quote && (
               <motion.blockquote
-                className="my-8 pl-6 border-l-2 border-neon-purple"
+                className="my-8 pl-6 border-l-2 border-neon-amber"
                 style={{
-                  boxShadow: '-2px 0 20px rgba(139,92,246,0.15)',
+                  boxShadow: '-2px 0 20px rgba(245,158,11,0.15)',
                 }}
                 variants={fadeInUp}
               >

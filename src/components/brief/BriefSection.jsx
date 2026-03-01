@@ -12,7 +12,7 @@ export default function BriefSection() {
       <SectionHeading
         title={t('briefTitle', lang)}
         subtitle={t('briefSubtitle', lang)}
-        glowColor="purple"
+        glowColor="amber"
       />
       <WeeklyBrief />
     </SectionWrapper>

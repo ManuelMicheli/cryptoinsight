@@ -16,7 +16,7 @@ export default function BriefMetricsTable({ metrics, lang }) {
     {
       label: 'DeFi TVL',
       value: `$${metrics.defiTvl}`,
-      color: 'text-neon-purple',
+      color: 'text-neon-amber',
     },
     {
       label: 'Fear & Greed',
