@@ -121,7 +121,7 @@ export default function SocialSection() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           {filteredVideos.map(video => (
             <VideoCard key={video.id} video={video} />
@@ -136,7 +136,7 @@ export default function SocialSection() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           {mostViewed.map(video => (
             <VideoCard key={video.id} video={video} />
@@ -151,7 +151,7 @@ export default function SocialSection() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           {topCreators.map(creator => (
             <CreatorCard key={creator.id} creator={creator} />
@@ -169,7 +169,7 @@ export default function SocialSection() {
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
+            viewport={{ once: true, amount: 0.05 }}
           >
             {topPredictions.map(prediction => (
               <PredictionCard key={prediction.id} prediction={prediction} />

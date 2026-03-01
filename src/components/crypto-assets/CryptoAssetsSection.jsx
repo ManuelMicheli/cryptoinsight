@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router'
 import { AnimatePresence } from 'motion/react'
 import SectionWrapper from '../layout/SectionWrapper'
@@ -41,6 +41,21 @@ export default function CryptoAssetsSection({ coins, loading }) {
     setSearchParams({}, { replace: true })
   }
 
+  // VaporizeTextCycle is canvas-based and needs a pixel value (can't use CSS clamp)
+  const [vaporFontSize, setVaporFontSize] = useState(() => {
+    const w = typeof window !== 'undefined' ? window.innerWidth : 1024
+    return w < 640 ? '32px' : w < 1024 ? '48px' : '64px'
+  })
+
+  useEffect(() => {
+    const update = () => {
+      const w = window.innerWidth
+      setVaporFontSize(w < 640 ? '32px' : w < 1024 ? '48px' : '64px')
+    }
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+
   const featuredIds = getCurrentFeatured()
 
   const filtered = coins
@@ -61,7 +76,7 @@ export default function CryptoAssetsSection({ coins, loading }) {
               texts={["Crypto", "is", "Cool"]}
               font={{
                 fontFamily: '"Orbitron", sans-serif',
-                fontSize: "clamp(2rem, 5vw + 1rem, 4rem)",
+                fontSize: vaporFontSize,
                 fontWeight: 700,
               }}
               color="rgb(0, 240, 255)"
