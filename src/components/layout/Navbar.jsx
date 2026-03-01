@@ -145,7 +145,37 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            <AlertBell />
+            <div className="hidden sm:block">
+              <AlertBell />
+            </div>
+
+            {/* Currency toggle — visible on mobile, replaces AlertBell */}
+            <button
+              onClick={toggleCurrency}
+              className="sm:hidden relative flex items-center w-[72px] h-8 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm overflow-hidden transition-colors"
+            >
+              <motion.div
+                className="absolute top-0.5 w-[34px] h-7 rounded-full"
+                style={{
+                  backgroundColor: 'color-mix(in srgb, var(--hero-secondary) 20%, transparent)',
+                  boxShadow: '0 0 10px color-mix(in srgb, var(--hero-secondary) 30%, transparent), 0 0 40px color-mix(in srgb, var(--hero-secondary) 10%, transparent)',
+                }}
+                animate={{ left: currency === 'usd' ? 1 : 35 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+              />
+              <span
+                className={`relative z-10 flex-1 typo-ui-sm font-bold text-center transition-colors ${currency === 'usd' ? '' : 'text-text-secondary'}`}
+                style={{ color: currency === 'usd' ? 'var(--hero-secondary)' : undefined }}
+              >
+                USD
+              </span>
+              <span
+                className={`relative z-10 flex-1 typo-ui-sm font-bold text-center transition-colors ${currency === 'eur' ? '' : 'text-text-secondary'}`}
+                style={{ color: currency === 'eur' ? 'var(--hero-secondary)' : undefined }}
+              >
+                EUR
+              </span>
+            </button>
 
             {/* Language toggle */}
             <button

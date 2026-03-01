@@ -15,9 +15,13 @@ import { t } from '../../i18n/translations'
 const TokenDetailModal = lazy(() => import('../crypto-detail/TokenDetailModal'))
 const VaporizeTextCycle = lazy(() => import('../ui/vapour-text-effect'))
 
+// Pin order: ETH first, then BTC, then by market cap
+const PIN_ORDER = ['ethereum', 'bitcoin']
+
 export default function CryptoAssetsSection({ coins, loading }) {
   const [activeCategory, setActiveCategory] = useState('all')
   const [selectedCoin, setSelectedCoin] = useState(null)
+  const [search, setSearch] = useState('')
   const { lang } = useLanguage()
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -53,14 +57,37 @@ export default function CryptoAssetsSection({ coins, loading }) {
 
   const featuredIds = getCurrentFeatured()
 
-  const filtered = coins
-    ? coins.filter((coin) => {
-        if (activeCategory === 'all') return true
-        if (activeCategory === 'featured') return featuredIds.includes(coin.id)
-        const meta = cryptoMeta[coin.id]
-        return meta?.category === activeCategory
-      })
-    : []
+  const filtered = useMemo(() => {
+    if (!coins) return []
+
+    let list = coins.filter((coin) => {
+      if (activeCategory === 'all') return true
+      if (activeCategory === 'featured') return featuredIds.includes(coin.id)
+      const meta = cryptoMeta[coin.id]
+      return meta?.category === activeCategory
+    })
+
+    // Search filter
+    const q = search.trim().toLowerCase()
+    if (q) {
+      list = list.filter(coin =>
+        coin.name?.toLowerCase().includes(q) ||
+        coin.symbol?.toLowerCase().includes(q)
+      )
+    }
+
+    // Pin ETH first, BTC second, rest by market cap
+    list.sort((a, b) => {
+      const aPin = PIN_ORDER.indexOf(a.id)
+      const bPin = PIN_ORDER.indexOf(b.id)
+      if (aPin !== -1 && bPin !== -1) return aPin - bPin
+      if (aPin !== -1) return -1
+      if (bPin !== -1) return 1
+      return (a.market_cap_rank ?? 999) - (b.market_cap_rank ?? 999)
+    })
+
+    return list
+  }, [coins, activeCategory, featuredIds, search])
 
   return (
     <section id="crypto" className="w-full bg-bg-secondary/30">
@@ -100,6 +127,33 @@ export default function CryptoAssetsSection({ coins, loading }) {
         </div>
 
         <CategoryTabs active={activeCategory} onChange={setActiveCategory} />
+
+        {/* Search */}
+        <div className="max-w-md mx-auto mt-4">
+          <div className="relative">
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-secondary/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input
+              type="text"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              placeholder={lang === 'it' ? 'Cerca crypto...' : 'Search crypto...'}
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-text-primary typo-body-sm placeholder:text-text-secondary/40 focus:outline-none focus:border-neon-cyan/40 transition-colors"
+            />
+            {search && (
+              <button
+                onClick={() => setSearch('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary/50 hover:text-text-primary transition-colors"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            )}
+          </div>
+        </div>
       </div>
 
       <div className="w-full px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20">
