@@ -4,9 +4,22 @@ export const API_URLS = {
 }
 
 export const COIN_IDS = [
-  'ethereum', 'solana', 'cardano', 'avalanche-2', 'sui',
-  'ripple', 'chainlink', 'aave', 'uniswap', 'immutable-x',
-  'the-sandbox', 'render-token', 'fetch-ai',
+  // Layer 1
+  'ethereum', 'solana', 'cardano', 'avalanche-2', 'sui', 'polkadot', 'near', 'aptos', 'cosmos', 'toncoin',
+  // Payments
+  'ripple', 'stellar', 'litecoin',
+  // DeFi
+  'chainlink', 'aave', 'uniswap', 'maker', 'lido-dao', 'pendle',
+  // Layer 2 / Infrastructure
+  'matic-network', 'arbitrum', 'optimism', 'starknet',
+  // Gaming / Metaverse
+  'immutable-x', 'the-sandbox', 'axie-infinity', 'gala',
+  // AI
+  'render-token', 'fetch-ai', 'bittensor', 'akash-network',
+  // Meme
+  'dogecoin', 'shiba-inu', 'pepe', 'bonk',
+  // RWA
+  'ondo-finance', 'mantra-dao',
 ]
 
 export const POLLING_INTERVALS = {
@@ -17,11 +30,15 @@ export const POLLING_INTERVALS = {
 
 export const CATEGORIES = {
   all: 'catAll',
+  featured: 'catFeatured',
   'layer-1': 'catLayer1',
   payments: 'catPayments',
   defi: 'catDefi',
+  'layer-2': 'catLayer2',
   gaming: 'catGaming',
   ai: 'catAi',
+  meme: 'catMeme',
+  rwa: 'catRwa',
 }
 
 export const COLORS = {

@@ -42,7 +42,7 @@ export default function GlowTitle() {
 
   return (
     <div ref={containerRef} className="text-center relative z-10">
-      <h1 className="gsap-reveal gsap-glow-title font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-4 tracking-wider">
+      <h1 className="gsap-reveal gsap-glow-title font-heading typo-display-hero font-black mb-4 tracking-wider">
         <span
           className="inline-block bg-clip-text text-transparent"
           style={{ backgroundImage: 'linear-gradient(to bottom, var(--hero-primary) 0%, var(--hero-mid) 40%, var(--hero-secondary) 100%)' }}
@@ -52,7 +52,7 @@ export default function GlowTitle() {
           INSIGHTS
         </span>
       </h1>
-      <p className="gsap-reveal text-text-secondary text-lg sm:text-xl md:text-2xl max-w-xl mx-auto font-light">
+      <p className="gsap-reveal text-text-secondary typo-body-lg max-w-xl mx-auto font-light">
         {t('heroSubtitle', lang)}
       </p>
     </div>

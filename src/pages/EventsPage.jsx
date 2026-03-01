@@ -3,6 +3,7 @@ import { t } from '../i18n/translations'
 import PageTransition from '../components/layout/PageTransition'
 import PageHero from '../components/heroes/PageHero'
 import EventsSection from '../components/events/EventsSection'
+import RegulationMapSection from '../components/events/RegulationMapSection'
 
 export default function EventsPage() {
   const { lang } = useLanguage()
@@ -16,6 +17,7 @@ export default function EventsPage() {
         subtitle={t('eventsHeroSubtitle', lang)}
       />
       <EventsSection />
+      <RegulationMapSection />
     </PageTransition>
   )
 }

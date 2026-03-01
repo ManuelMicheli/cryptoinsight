@@ -30,10 +30,10 @@ export default function WhyCryptoSection() {
   return (
     <SectionWrapper id="why-crypto">
       <div className="text-center mb-16 md:mb-20">
-        <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6 tracking-tight">
+        <h2 className="font-heading typo-h1 font-bold mb-6 tracking-tight">
           {t('whyCryptoTitle', lang)}
         </h2>
-        <p className="text-text-secondary text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
+        <p className="text-text-secondary typo-body-lg max-w-3xl mx-auto">
           {t('whyCryptoSubtitle', lang)}
         </p>
       </div>

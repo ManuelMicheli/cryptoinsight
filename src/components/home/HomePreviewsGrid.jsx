@@ -1,10 +1,18 @@
+import { useMemo } from 'react'
 import { Link } from 'react-router'
 import { motion } from 'motion/react'
 import SectionWrapper from '../layout/SectionWrapper'
 import SectionHeading from '../ui/SectionHeading'
+import GlassCard from '../ui/GlassCard'
 import { fadeInUp, staggerContainer } from '../../hooks/useInViewAnimation'
 import { useLanguage } from '../../contexts/LanguageContext'
+import { useCurrency } from '../../contexts/CurrencyContext'
+import { useCryptoData } from '../../contexts/CryptoDataContext'
 import { t } from '../../i18n/translations'
+import { formatCurrency, formatPercentage } from '../../utils/formatters'
+import { cryptoMeta } from '../../data/cryptoMeta'
+import { events } from '../../data/events'
+import { news } from '../../data/news'
 
 const icons = {
   crypto: (
@@ -51,35 +59,30 @@ const colorMap = {
   news: 'text-neon-cyan',
 }
 
-const pages = [
-  {
-    path: '/crypto',
-    icon: 'crypto',
-    titleKey: 'previewCryptoTitle',
-    descKey: 'previewCryptoDesc',
-  },
-  {
-    path: '/mercato',
-    icon: 'market',
-    titleKey: 'previewMarketTitle',
-    descKey: 'previewMarketDesc',
-  },
-  {
-    path: '/eventi',
-    icon: 'events',
-    titleKey: 'previewEventsTitle',
-    descKey: 'previewEventsDesc',
-  },
-  {
-    path: '/news',
-    icon: 'news',
-    titleKey: 'previewNewsTitle',
-    descKey: 'previewNewsDesc',
-  },
-]
-
 export default function HomePreviewsGrid() {
   const { lang } = useLanguage()
+  const { currency } = useCurrency()
+  const { coins, fearGreed, globalData } = useCryptoData()
+
+  // Top 3 crypto by market cap
+  const topCrypto = useMemo(() => {
+    if (!coins) return []
+    return coins.slice(0, 3)
+  }, [coins])
+
+  // Next 2 upcoming events
+  const upcomingEvents = useMemo(() => {
+    const now = new Date()
+    return events
+      .filter(e => new Date(e.date) >= now)
+      .sort((a, b) => new Date(a.date) - new Date(b.date))
+      .slice(0, 2)
+  }, [])
+
+  // Latest news
+  const latestNews = news[0]
+
+  const impactIcons = { bullish: '🟢', bearish: '🔴', neutral: '🟡' }
 
   return (
     <SectionWrapper>
@@ -95,31 +98,159 @@ export default function HomePreviewsGrid() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
       >
-        {pages.map((page) => (
-          <motion.div key={page.path} variants={fadeInUp}>
-            <Link to={page.path} className="block group h-full">
-              <div className={`panel ${panelVariant[page.icon] !== 'cyan' ? `panel-${panelVariant[page.icon]}` : ''} h-full transition-all duration-300 hover:translate-y-[-4px]`}>
-                <div className="flex items-start justify-between mb-6">
-                  <div className={`w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center ${colorMap[page.icon]}`}>
-                    {icons[page.icon]}
-                  </div>
-                  <svg
-                    className={`w-5 h-5 text-text-secondary group-hover:${colorMap[page.icon]} group-hover:translate-x-1 transition-all duration-300`}
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
+        {/* Crypto Preview */}
+        <motion.div variants={fadeInUp}>
+          <Link to="/crypto" className="block group h-full">
+            <div className="panel panel-purple h-full transition-all duration-300 hover:translate-y-[-4px]">
+              <div className="flex items-start justify-between mb-6">
+                <div className={`w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center ${colorMap.crypto}`}>
+                  {icons.crypto}
                 </div>
-                <h3 className={`font-heading text-lg md:text-xl font-bold text-text-primary mb-3 group-hover:${colorMap[page.icon]} transition-colors`}>
-                  {t(page.titleKey, lang)}
-                </h3>
-                <p className="text-text-secondary text-sm md:text-base leading-relaxed">
-                  {t(page.descKey, lang)}
-                </p>
+                <svg className="w-5 h-5 text-text-secondary group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </div>
-            </Link>
-          </motion.div>
-        ))}
+              <h3 className="font-heading typo-h3 font-bold text-text-primary mb-3">{t('previewCryptoTitle', lang)}</h3>
+
+              {/* Top 3 crypto mini cards */}
+              {topCrypto.length > 0 && (
+                <div className="space-y-2 mb-4">
+                  {topCrypto.map(coin => {
+                    const change = coin.price_change_percentage_24h_in_currency ?? 0
+                    return (
+                      <div key={coin.id} className="flex items-center justify-between py-1.5 px-2 rounded-lg bg-white/[0.03]">
+                        <div className="flex items-center gap-2">
+                          {coin.image && <img src={coin.image} alt="" className="w-5 h-5 rounded-full" />}
+                          <span className="text-text-primary text-sm font-medium">{coin.symbol?.toUpperCase()}</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-text-secondary text-sm">{formatCurrency(coin.current_price, 2, currency)}</span>
+                          <span className={`text-xs font-medium ${change >= 0 ? 'text-neon-green' : 'text-neon-red'}`}>
+                            {formatPercentage(change)}
+                          </span>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+
+              <p className="text-neon-purple text-sm font-medium">
+                {lang === 'it' ? 'Esplora tutte →' : 'Explore all →'}
+              </p>
+            </div>
+          </Link>
+        </motion.div>
+
+        {/* Market Preview */}
+        <motion.div variants={fadeInUp}>
+          <Link to="/mercato" className="block group h-full">
+            <div className="panel panel-green h-full transition-all duration-300 hover:translate-y-[-4px]">
+              <div className="flex items-start justify-between mb-6">
+                <div className={`w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center ${colorMap.market}`}>
+                  {icons.market}
+                </div>
+                <svg className="w-5 h-5 text-text-secondary group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+              <h3 className="font-heading typo-h3 font-bold text-text-primary mb-3">{t('previewMarketTitle', lang)}</h3>
+
+              {/* Fear & Greed + Market Cap mini */}
+              <div className="flex items-center gap-4 mb-4 py-2 px-3 rounded-lg bg-white/[0.03]">
+                <div className="text-center">
+                  <div className="text-[10px] text-text-secondary uppercase tracking-wider">{t('fearGreedIndex', lang)}</div>
+                  <div className="font-heading text-xl font-bold text-neon-green mt-1">{fearGreed?.value ?? '—'}</div>
+                </div>
+                <div className="w-px h-10 bg-white/10" />
+                <div className="text-center">
+                  <div className="text-[10px] text-text-secondary uppercase tracking-wider">{t('marketBtcDominance', lang)}</div>
+                  <div className="font-heading text-xl font-bold text-text-primary mt-1">{globalData?.market_cap_percentage?.btc?.toFixed(1) ?? '—'}%</div>
+                </div>
+              </div>
+
+              <p className="text-neon-green text-sm font-medium">
+                {lang === 'it' ? 'Analizza il mercato →' : 'Analyze the market →'}
+              </p>
+            </div>
+          </Link>
+        </motion.div>
+
+        {/* Events Preview */}
+        <motion.div variants={fadeInUp}>
+          <Link to="/eventi" className="block group h-full">
+            <div className="panel panel-amber h-full transition-all duration-300 hover:translate-y-[-4px]">
+              <div className="flex items-start justify-between mb-6">
+                <div className={`w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center ${colorMap.events}`}>
+                  {icons.events}
+                </div>
+                <svg className="w-5 h-5 text-text-secondary group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+              <h3 className="font-heading typo-h3 font-bold text-text-primary mb-3">{t('previewEventsTitle', lang)}</h3>
+
+              {/* Next 2 events */}
+              {upcomingEvents.length > 0 && (
+                <div className="space-y-2 mb-4">
+                  {upcomingEvents.map(ev => {
+                    const date = new Date(ev.date)
+                    const daysUntil = Math.ceil((date - new Date()) / 86400000)
+                    return (
+                      <div key={ev.id} className="flex items-center gap-3 py-1.5 px-2 rounded-lg bg-white/[0.03]">
+                        <div className="font-heading text-lg font-bold text-neon-amber">{date.getDate()}</div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-text-primary text-sm truncate">{typeof ev.title === 'string' ? ev.title : ev.title[lang]}</p>
+                          <p className="text-text-secondary text-[10px]">
+                            {lang === 'it' ? `tra ${daysUntil} giorni` : `in ${daysUntil} days`}
+                          </p>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+
+              <p className="text-neon-amber text-sm font-medium">
+                {lang === 'it' ? 'Vedi tutti gli eventi →' : 'View all events →'}
+              </p>
+            </div>
+          </Link>
+        </motion.div>
+
+        {/* News Preview */}
+        <motion.div variants={fadeInUp}>
+          <Link to="/news" className="block group h-full">
+            <div className="panel h-full transition-all duration-300 hover:translate-y-[-4px]">
+              <div className="flex items-start justify-between mb-6">
+                <div className={`w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center ${colorMap.news}`}>
+                  {icons.news}
+                </div>
+                <svg className="w-5 h-5 text-text-secondary group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+              <h3 className="font-heading typo-h3 font-bold text-text-primary mb-3">{t('previewNewsTitle', lang)}</h3>
+
+              {/* Latest news */}
+              {latestNews && (
+                <div className="mb-4 py-2 px-3 rounded-lg bg-white/[0.03]">
+                  <div className="flex items-center gap-2 mb-1">
+                    {latestNews.impact && <span className="text-xs">{impactIcons[latestNews.impact]}</span>}
+                    <span className="text-text-secondary text-[10px]">{typeof latestNews.time === 'string' ? latestNews.time : latestNews.time[lang]}</span>
+                  </div>
+                  <p className="text-text-primary text-sm line-clamp-2">
+                    {typeof latestNews.title === 'string' ? latestNews.title : latestNews.title[lang]}
+                  </p>
+                </div>
+              )}
+
+              <p className="text-neon-cyan text-sm font-medium">
+                {lang === 'it' ? 'Leggi le news →' : 'Read the news →'}
+              </p>
+            </div>
+          </Link>
+        </motion.div>
       </motion.div>
     </SectionWrapper>
   )

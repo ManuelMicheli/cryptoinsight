@@ -11,7 +11,7 @@ export default function ImpactBadge({ impact }) {
   const { lang } = useLanguage()
   const s = styles[impact] || styles.neutral
   return (
-    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${s.bg} ${s.text}`}>
+    <span className={`inline-flex items-center px-2 py-0.5 rounded-full typo-ui-sm font-medium ${s.bg} ${s.text}`}>
       {t(s.labelKey, lang)}
     </span>
   )

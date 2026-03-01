@@ -65,11 +65,15 @@ export const translations = {
 
   // Categories
   catAll: { it: 'Tutte', en: 'All' },
+  catFeatured: { it: 'In Evidenza', en: 'Featured' },
   catLayer1: { it: 'Layer 1', en: 'Layer 1' },
   catPayments: { it: 'Pagamenti', en: 'Payments' },
   catDefi: { it: 'DeFi', en: 'DeFi' },
+  catLayer2: { it: 'Layer 2', en: 'Layer 2' },
   catGaming: { it: 'Gaming', en: 'Gaming' },
   catAi: { it: 'AI', en: 'AI' },
+  catMeme: { it: 'Meme', en: 'Meme' },
+  catRwa: { it: 'RWA', en: 'RWA' },
 
   // Price Change Labels
   priceToday: { it: 'Oggi', en: 'Today' },
@@ -155,65 +159,48 @@ export const translations = {
   newsSource: { it: 'Fonte', en: 'Source' },
   newsTimeAgo: { it: 'fa', en: 'ago' },
 
-  // Bybit Section
+  // Portfolio Section
   bybitTitle: {
     it: 'IL TUO PORTAFOGLIO',
     en: 'YOUR PORTFOLIO',
   },
   bybitSubtitle: {
-    it: 'Collega il tuo account Bybit per avere sempre sotto controllo i tuoi investimenti, tutto in un unico posto',
-    en: 'Connect your Bybit account to always keep track of your investments, all in one place',
+    it: 'Inserisci le tue crypto manualmente e monitora il valore in tempo reale con i prezzi CoinGecko',
+    en: 'Add your crypto manually and monitor the value in real-time with CoinGecko prices',
   },
-  bybitConnect: { it: 'Connetti Bybit', en: 'Connect Bybit' },
-  bybitConnectDesc: {
-    it: 'Usa le API Key di sola lettura del tuo account Bybit o Bybit EU. I tuoi dati restano sul tuo dispositivo.',
-    en: 'Use the read-only API keys from your Bybit or Bybit EU account. Your data stays on your device.',
+  portfolioAddAsset: {
+    it: 'Aggiungi Asset',
+    en: 'Add Asset',
   },
-  bybitRegion: { it: 'Regione', en: 'Region' },
-  bybitApiKey: { it: 'API Key', en: 'API Key' },
-  bybitApiKeyPlaceholder: { it: 'La tua API Key di Bybit', en: 'Your Bybit API Key' },
-  bybitSecretKey: { it: 'Secret Key', en: 'Secret Key' },
-  bybitSecretPlaceholder: { it: 'La tua Secret Key', en: 'Your Secret Key' },
-  bybitConnectBtn: { it: 'CONNETTI ACCOUNT', en: 'CONNECT ACCOUNT' },
-  bybitConnecting: { it: 'Connessione in corso...', en: 'Connecting...' },
-  bybitReadOnly: {
-    it: "Usa solo API Key con permessi di <strong>sola lettura</strong>. Non condividiamo mai i tuoi dati.",
-    en: 'Only use API keys with <strong>read-only</strong> permissions. We never share your data.',
+  portfolioAddAssetDesc: {
+    it: 'Seleziona una crypto, inserisci la quantita e l\'exchange. I dati restano sul tuo dispositivo.',
+    en: 'Select a crypto, enter the quantity and exchange. Your data stays on your device.',
   },
-  bybitErrorEmpty: {
-    it: 'Inserisci sia la API Key che la Secret Key',
-    en: 'Please enter both the API Key and the Secret Key',
+  portfolioCoin: { it: 'Crypto', en: 'Crypto' },
+  portfolioCoinPlaceholder: { it: 'Cerca crypto...', en: 'Search crypto...' },
+  portfolioQuantity: { it: 'Quantita', en: 'Quantity' },
+  portfolioQuantityPlaceholder: { it: 'Es. 0.5', en: 'E.g. 0.5' },
+  portfolioExchange: { it: 'Exchange', en: 'Exchange' },
+  portfolioAddBtn: { it: 'AGGIUNGI', en: 'ADD' },
+  portfolioTotal: {
+    it: 'Valore Totale',
+    en: 'Total Value',
   },
-  bybitErrorGeneric: {
-    it: 'Impossibile connettersi. Verifica le credenziali e riprova.',
-    en: 'Unable to connect. Check your credentials and try again.',
+  portfolioChange24h: {
+    it: 'Variazione 24h',
+    en: '24h Change',
   },
-  bybitErrorBybit: {
-    it: 'Errore Bybit',
-    en: 'Bybit Error',
+  portfolioAssets: { it: 'I Tuoi Asset', en: 'Your Assets' },
+  portfolioRemove: { it: 'Rimuovi', en: 'Remove' },
+  portfolioEmpty: {
+    it: 'Il tuo portfolio e\' vuoto. Aggiungi la tua prima crypto!',
+    en: 'Your portfolio is empty. Add your first crypto!',
   },
-  bybitErrorVerify: {
-    it: 'Verifica le tue credenziali',
-    en: 'Verify your credentials',
+  portfolioLocalStorage: {
+    it: 'I dati sono salvati solo sul tuo dispositivo e persistono tra le sessioni.',
+    en: 'Data is saved only on your device and persists across sessions.',
   },
-  bybitConnected: { it: 'ACCOUNT CONNESSO', en: 'ACCOUNT CONNECTED' },
-  bybitDisconnect: { it: 'Disconnetti', en: 'Disconnect' },
-  bybitTotalValue: {
-    it: 'Valore Totale del Portafoglio',
-    en: 'Total Portfolio Value',
-  },
-  bybitTotalPnl: {
-    it: 'Guadagno / Perdita Totale',
-    en: 'Total Profit / Loss',
-  },
-  bybitYourCrypto: { it: 'Le Tue Crypto', en: 'Your Crypto' },
-  bybitUnits: { it: "unita'", en: 'units' },
-  bybitGain: { it: 'Guadagno', en: 'Profit' },
-  bybitLoss: { it: 'Perdita', en: 'Loss' },
-  bybitNoCoins: {
-    it: 'Nessuna crypto trovata nel tuo portafoglio Bybit',
-    en: 'No crypto found in your Bybit portfolio',
-  },
+  portfolioClearAll: { it: 'Svuota tutto', en: 'Clear all' },
 
   // Page Heroes
   cryptoHeroTitle: { it: 'TOP CRYPTO', en: 'TOP CRYPTO' },
@@ -286,6 +273,223 @@ export const translations = {
     en: 'The page you are looking for does not exist or has been moved',
   },
   notFoundCta: { it: 'TORNA ALLA HOME', en: 'BACK TO HOME' },
+
+  // Navbar - Intelligence & Strumenti
+  navIntelligence: { it: 'Intelligence', en: 'Intelligence' },
+  navStrumenti: { it: 'Strumenti', en: 'Tools' },
+
+  // Intelligence - Page Hero
+  intelligenceHeroTitle: { it: 'DATA', en: 'DATA' },
+  intelligenceHeroHighlight: { it: 'INTELLIGENCE', en: 'INTELLIGENCE' },
+  intelligenceHeroSubtitle: {
+    it: 'Analisi avanzata dei dati on-chain, sentiment e correlazioni per decisioni informate',
+    en: 'Advanced on-chain data analysis, sentiment and correlations for informed decisions',
+  },
+
+  // Intelligence - Narrative
+  narrativeTitle: {
+    it: 'PERCHE\' SI MUOVE',
+    en: 'WHY IT MOVES',
+  },
+  narrativeSubtitle: {
+    it: 'Collega le variazioni di prezzo significative agli eventi concreti che le hanno causate',
+    en: 'Connect significant price changes to the concrete events that caused them',
+  },
+  narrativeEventsLabel: {
+    it: 'Eventi correlati',
+    en: 'Related events',
+  },
+  narrativeEmpty: {
+    it: 'Nessun movimento significativo nelle ultime 24h',
+    en: 'No significant movements in the last 24h',
+  },
+
+  // Intelligence - Whale
+  whaleTitle: {
+    it: 'WHALE TRACKER',
+    en: 'WHALE TRACKER',
+  },
+  whaleSubtitle: {
+    it: 'Monitora i movimenti significativi on-chain delle whale e dello smart money in tempo reale',
+    en: 'Monitor significant on-chain whale and smart money movements in real-time',
+  },
+  whaleAlertLabel: {
+    it: 'Movimento massivo rilevato!',
+    en: 'Massive movement detected!',
+  },
+  whaleFilterAll: {
+    it: 'Tutte le crypto',
+    en: 'All crypto',
+  },
+  whaleEmpty: {
+    it: 'Nessuna transazione trovata con i filtri selezionati',
+    en: 'No transactions found with selected filters',
+  },
+
+  // Intelligence - Sentiment
+  sentimentTitle: {
+    it: 'SENTIMENT PER TOKEN',
+    en: 'TOKEN SENTIMENT',
+  },
+  sentimentSubtitle: {
+    it: 'Punteggio Fear & Greed individuale per ogni crypto basato su indicatori on-chain e social',
+    en: 'Individual Fear & Greed score for each crypto based on on-chain and social indicators',
+  },
+
+  // Intelligence - Correlation
+  correlationTitle: {
+    it: 'MATRICE CORRELAZIONI',
+    en: 'CORRELATION MATRIX',
+  },
+  correlationSubtitle: {
+    it: 'Heatmap interattiva delle correlazioni tra crypto e asset tradizionali',
+    en: 'Interactive heatmap of correlations between crypto and traditional assets',
+  },
+  correlationExplainer: {
+    it: 'La matrice mostra quanto due asset si muovono insieme. Un valore vicino a +1 (ciano) significa che salgono e scendono insieme. Un valore vicino a -1 (rosso) significa che si muovono in direzioni opposte — utile per diversificare il portfolio. Passa il mouse su una cella per i dettagli.',
+    en: 'The matrix shows how closely two assets move together. A value near +1 (cyan) means they rise and fall together. A value near -1 (red) means they move in opposite directions — useful for portfolio diversification. Hover over a cell for details.',
+  },
+  correlationPeriod: {
+    it: 'Periodo',
+    en: 'Period',
+  },
+
+  // Strumenti - Page Hero
+  strumentiHeroTitle: { it: 'STRUMENTI', en: 'ANALYTICAL' },
+  strumentiHeroHighlight: { it: 'ANALITICI', en: 'TOOLS' },
+  strumentiHeroSubtitle: {
+    it: 'Calendario unlock, due diligence, portfolio analysis e simulatore what-if per decisioni strategiche',
+    en: 'Unlock calendar, due diligence, portfolio analysis and what-if simulator for strategic decisions',
+  },
+
+  // Strumenti - Unlock
+  unlockTitle: {
+    it: 'CALENDARIO UNLOCK',
+    en: 'UNLOCK CALENDAR',
+  },
+  unlockSubtitle: {
+    it: 'Token unlock imminenti con analisi dell\'impatto sulla supply e dati storici',
+    en: 'Upcoming token unlocks with supply impact analysis and historical data',
+  },
+
+  // Strumenti - Health
+  healthTitle: {
+    it: 'HEALTH SCORE',
+    en: 'HEALTH SCORE',
+  },
+  healthSubtitle: {
+    it: 'Due diligence tecnica: analisi del codice, sicurezza, on-chain e team per ogni progetto',
+    en: 'Technical due diligence: code, security, on-chain and team analysis for each project',
+  },
+
+  // Strumenti - Portfolio
+  portfolioTitle: {
+    it: 'PORTFOLIO X-RAY',
+    en: 'PORTFOLIO X-RAY',
+  },
+  portfolioSubtitle: {
+    it: 'Inserisci i tuoi holdings per un\'analisi radiografica: diversificazione, rischio e suggerimenti',
+    en: 'Enter your holdings for an X-ray analysis: diversification, risk and suggestions',
+  },
+  portfolioEmpty: {
+    it: 'Aggiungi delle crypto al tuo portfolio per visualizzare l\'analisi',
+    en: 'Add crypto to your portfolio to view the analysis',
+  },
+
+  // Strumenti - Scenario
+  scenarioTitle: {
+    it: 'SCENARIO SIMULATOR',
+    en: 'SCENARIO SIMULATOR',
+  },
+  scenarioSubtitle: {
+    it: 'Simula scenari "what-if" con slider interattivi e scopri l\'impatto potenziale sul tuo portfolio',
+    en: 'Simulate "what-if" scenarios with interactive sliders and discover the potential impact on your portfolio',
+  },
+  scenarioDisclaimer: {
+    it: 'Proiezioni basate su correlazioni storiche, non garanzia di risultati futuri',
+    en: 'Projections based on historical correlations, not a guarantee of future results',
+  },
+
+  // Navbar - Regolamentazione
+  navRegolamentazione: { it: 'Regolamentazione', en: 'Regulation' },
+
+  // Brief - Weekly Intelligence
+  briefTitle: {
+    it: 'INTELLIGENCE BRIEF',
+    en: 'INTELLIGENCE BRIEF',
+  },
+  briefSubtitle: {
+    it: 'Report settimanale in stile analista: i movimenti chiave, le metriche e le narrative che contano',
+    en: 'Analyst-style weekly report: key movements, metrics and narratives that matter',
+  },
+
+  // Alerts
+  alertsTitle: { it: 'Centro Alert', en: 'Alert Center' },
+  alertsActive: { it: 'Attivi', en: 'Active' },
+  alertsHistory: { it: 'Cronologia', en: 'History' },
+  alertsCreate: { it: 'Crea Alert', en: 'Create Alert' },
+  alertsEmpty: { it: 'Nessun alert configurato', en: 'No alerts configured' },
+
+  // Home Preview - new pages
+  previewIntelligenceTitle: { it: 'DATA INTELLIGENCE', en: 'DATA INTELLIGENCE' },
+  previewIntelligenceDesc: {
+    it: 'Narrative Engine, Whale Tracker, Sentiment per token e Matrice Correlazioni',
+    en: 'Narrative Engine, Whale Tracker, Token Sentiment and Correlation Matrix',
+  },
+  previewStrumentiTitle: { it: 'STRUMENTI ANALITICI', en: 'ANALYTICAL TOOLS' },
+  previewStrumentiDesc: {
+    it: 'Calendario Unlock, Health Score, Portfolio X-Ray e Scenario Simulator',
+    en: 'Unlock Calendar, Health Score, Portfolio X-Ray and Scenario Simulator',
+  },
+
+  // Regulation
+  regulationTitle: {
+    it: 'REGOLAMENTAZIONE CRYPTO',
+    en: 'CRYPTO REGULATION',
+  },
+  regulationSubtitle: {
+    it: 'Mappa interattiva delle normative crypto nel mondo: tassazione, ETF, stablecoin, mining e licenze exchange per ogni paese',
+    en: 'Interactive map of crypto regulations worldwide: taxation, ETFs, stablecoins, mining and exchange licensing by country',
+  },
+  regulationHeroTitle: { it: 'CRYPTO', en: 'CRYPTO' },
+  regulationHeroHighlight: { it: 'REGOLAMENTAZIONE', en: 'REGULATION' },
+  regulationHeroSubtitle: {
+    it: 'Confronta le normative crypto di 27 paesi: tassazione, ETF, stablecoin e licenze exchange',
+    en: 'Compare crypto regulations across 27 countries: taxation, ETFs, stablecoins and exchange licensing',
+  },
+
+  // Events Category Tabs
+  eventsTabAll: { it: 'Tutti', en: 'All' },
+  eventsTabEvents: { it: 'Eventi', en: 'Events' },
+  eventsTabUnlock: { it: 'Unlock', en: 'Unlocks' },
+  eventsTabRegulation: { it: 'Regolamentazione', en: 'Regulation' },
+
+  // Active Whales (Market)
+  activeWhales24h: { it: 'Whale Attive 24h', en: 'Active Whales 24h' },
+
+  // Token Detail Modal
+  tokenDetailNarrative: { it: "PERCHE' SI MUOVE", en: 'WHY IT MOVES' },
+  tokenDetailSentiment: { it: 'SENTIMENT', en: 'SENTIMENT' },
+  tokenDetailHealth: { it: 'HEALTH SCORE', en: 'HEALTH SCORE' },
+  tokenDetailWhale: { it: 'WHALE TRACKER', en: 'WHALE TRACKER' },
+  tokenDetailUnlock: { it: 'UNLOCK CALENDAR', en: 'UNLOCK CALENDAR' },
+  tokenDetailAction: { it: 'COSA CONSIDERARE', en: 'WHAT TO CONSIDER' },
+  tokenDetailNoNarrative: {
+    it: 'Nessun movimento significativo nelle ultime 24h',
+    en: 'No significant movements in the last 24h',
+  },
+  tokenDetailNoWhale: {
+    it: 'Nessun movimento whale recente',
+    en: 'No recent whale movements',
+  },
+  tokenDetailNoUnlock: {
+    it: 'Nessun unlock programmato',
+    en: 'No scheduled unlocks',
+  },
+  tokenDetailDisclaimer: {
+    it: "Non e' consulenza finanziaria",
+    en: 'This is not financial advice',
+  },
 
   // Footer
   footerDisclaimer: { it: "ATTENZIONE: NON E' CONSULENZA FINANZIARIA", en: 'WARNING: NOT FINANCIAL ADVICE' },

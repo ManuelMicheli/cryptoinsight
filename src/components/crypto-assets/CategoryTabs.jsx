@@ -12,7 +12,7 @@ export default function CategoryTabs({ active, onChange }) {
         <button
           key={key}
           onClick={() => onChange(key)}
-          className={`relative px-6 py-2.5 rounded-xl text-sm md:text-base font-medium transition-colors ${
+          className={`relative px-6 py-2.5 rounded-xl typo-ui font-medium transition-colors ${
             active === key ? 'text-neon-cyan' : 'text-text-secondary hover:text-text-primary'
           }`}
         >

@@ -1,6 +1,7 @@
 import { motion, useSpring, useTransform } from 'motion/react'
 import { useLanguage } from '../../contexts/LanguageContext'
 import { t } from '../../i18n/translations'
+import TechTerm from '../ui/TechTerm'
 
 const getColor = (value) => {
   if (value <= 25) return '#ef4444'
@@ -58,9 +59,9 @@ export default function FearGreedGauge({ value = 50, classification = 'Neutral' 
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-white/20 border-2" style={{ borderColor: color }} />
       </div>
       <div className="text-center mt-3">
-        <div className="font-heading text-3xl font-bold" style={{ color }}>{value}</div>
-        <div className="text-text-secondary text-sm mt-1">{t(labelKey, lang)}</div>
-        <div className="text-text-secondary text-xs mt-0.5">{t('fearGreedIndex', lang)}</div>
+        <div className="font-heading typo-stat font-bold" style={{ color }}>{value}</div>
+        <div className="text-text-secondary typo-body-sm mt-1">{t(labelKey, lang)}</div>
+        <div className="text-text-secondary typo-ui-sm mt-0.5"><TechTerm term="fear_greed">{t('fearGreedIndex', lang)}</TechTerm></div>
       </div>
     </div>
   )

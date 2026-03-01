@@ -17,11 +17,11 @@ export default function GainersLosers({ coins }) {
     <div className="flex items-center justify-between py-3 border-b border-white/[0.04] last:border-b-0">
       <div className="flex items-center gap-3">
         <img src={coin.image} alt={coin.name} className="w-7 h-7 rounded-full ring-1 ring-white/10" />
-        <span className="text-sm font-semibold text-text-primary">{coin.symbol?.toUpperCase()}</span>
+        <span className="typo-body-sm font-semibold text-text-primary">{coin.symbol?.toUpperCase()}</span>
       </div>
       <div className="flex items-center gap-4">
-        <span className="text-sm text-text-secondary">{formatCurrency(coin.current_price, 2, currency)}</span>
-        <span className={`text-sm font-bold ${colorClass}`}>{formatPercentage(coin.price_change_percentage_24h)}</span>
+        <span className="typo-body-sm text-text-secondary">{formatCurrency(coin.current_price, 2, currency)}</span>
+        <span className={`typo-body-sm font-bold ${colorClass}`}>{formatPercentage(coin.price_change_percentage_24h)}</span>
       </div>
     </div>
   )
@@ -29,7 +29,7 @@ export default function GainersLosers({ coins }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
       <div className="panel panel-dark">
-        <h4 className="font-heading text-base text-neon-green mb-4 flex items-center gap-2">
+        <h4 className="font-heading typo-h4 text-neon-green mb-4 flex items-center gap-2">
           <span>▲</span> {t('gainersTitle', lang)}
         </h4>
         <div>
@@ -40,7 +40,7 @@ export default function GainersLosers({ coins }) {
       </div>
 
       <div className="panel panel-dark">
-        <h4 className="font-heading text-base text-neon-red mb-4 flex items-center gap-2">
+        <h4 className="font-heading typo-h4 text-neon-red mb-4 flex items-center gap-2">
           <span>▼</span> {t('losersTitle', lang)}
         </h4>
         <div>

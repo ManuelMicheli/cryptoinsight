@@ -42,8 +42,8 @@ export default function FeatureCard({ icon, title, description, color = 'cyan' }
         <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/5 ${colorMap[color]} mb-6`}>
           {icons[icon]}
         </div>
-        <h3 className={`font-heading text-lg md:text-xl font-bold mb-4 ${colorMap[color]}`}>{title}</h3>
-        <p className={`text-sm md:text-base leading-relaxed ${colorMap[color]} opacity-80`}>{description}</p>
+        <h3 className={`font-heading typo-h3 font-bold mb-4 ${colorMap[color]}`}>{title}</h3>
+        <p className={`typo-body ${colorMap[color]} opacity-80`}>{description}</p>
       </GlassCard>
     </motion.div>
   )

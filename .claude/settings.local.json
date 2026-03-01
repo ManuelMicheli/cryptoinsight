@@ -9,7 +9,11 @@
       "WebFetch(domain:api.alternative.me)",
       "WebFetch(domain:www.npmjs.com)",
       "Bash(grep:*)",
-      "Bash(gh repo:*)"
+      "Bash(gh repo:*)",
+      "WebFetch(domain:21st.dev)",
+      "Bash(xargs ls:*)",
+      "WebFetch(domain:bybit-exchange.github.io)",
+      "Bash(ls:*)"
     ]
   }
 }

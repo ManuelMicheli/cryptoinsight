@@ -27,13 +27,13 @@ function CircleNewsCard({ article, index, lang }) {
           boxShadow: `0 0 20px ${color.glow}, 0 0 60px ${color.glow}`,
         }}
       >
-        <span className={`font-heading text-2xl font-bold ${color.text} mb-2`}>
+        <span className={`font-heading typo-stat-sm font-bold ${color.text} mb-2`}>
           {String(index + 1).padStart(2, '0')}
         </span>
-        <span className="font-heading text-[9px] font-semibold tracking-wider text-neon-purple uppercase mb-1">
+        <span className="font-heading typo-micro font-semibold tracking-wider text-neon-purple uppercase mb-1">
           {l(article.category, lang)}
         </span>
-        <h4 className="text-xs font-bold text-text-primary leading-snug line-clamp-3 group-hover:text-neon-cyan transition-colors duration-300">
+        <h4 className="typo-ui-sm font-bold text-text-primary line-clamp-3 group-hover:text-neon-cyan transition-colors duration-300">
           {l(article.title, lang)}
         </h4>
       </div>
@@ -62,7 +62,7 @@ export default function ExploreNewsSection() {
       </div>
 
       <motion.div
-        className="relative z-10 w-full max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20"
+        className="relative z-10 w-full px-6 md:px-12 lg:px-16 xl:px-20 2xl:px-24 py-12 md:py-16 lg:py-20"
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
@@ -75,26 +75,25 @@ export default function ExploreNewsSection() {
               <span className="absolute inline-flex h-full w-full rounded-full bg-neon-cyan opacity-75" style={{ animation: 'live-pulse 2s ease-in-out infinite' }} />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-neon-cyan" />
             </span>
-            <span className="font-heading text-[10px] font-semibold text-neon-cyan tracking-[0.2em] uppercase">
+            <span className="font-heading typo-micro font-semibold text-neon-cyan tracking-[0.2em] uppercase">
               {t('exploreNewsLive', lang)}
             </span>
           </div>
 
           <h2
-            className="font-heading font-bold text-text-primary mb-4 leading-tight"
-            style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}
+            className="font-heading typo-h1 font-bold text-text-primary mb-4"
           >
             {t('exploreNewsHeading', lang)}{' '}
             <span className="text-glow-cyan text-neon-cyan">NEWS</span>
           </h2>
 
-          <p className="text-text-secondary text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
+          <p className="text-text-secondary typo-body-lg max-w-2xl mx-auto mb-8">
             {t('exploreNewsDesc', lang)}
           </p>
 
           <Link to="/news">
             <motion.div
-              className="relative inline-block px-8 py-3 rounded-xl font-heading text-xs font-semibold tracking-wider text-bg-primary bg-neon-cyan overflow-hidden group"
+              className="relative inline-block px-8 py-3 rounded-xl font-heading typo-ui-sm font-semibold tracking-wider text-bg-primary bg-neon-cyan overflow-hidden group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
               animate={{

@@ -4,6 +4,10 @@ import { t } from '../i18n/translations'
 import PageTransition from '../components/layout/PageTransition'
 import PageHero from '../components/heroes/PageHero'
 import MarketPulseSection from '../components/market-pulse/MarketPulseSection'
+import WhaleActivityFeedSection from '../components/market-pulse/WhaleActivityFeed'
+import CorrelationSection from '../components/correlation/CorrelationSection'
+import PortfolioSection from '../components/portfolio/PortfolioSection'
+import ScenarioSection from '../components/scenario/ScenarioSection'
 
 export default function MarketPage() {
   const { lang } = useLanguage()
@@ -24,6 +28,10 @@ export default function MarketPage() {
         fearGreedLoading={fearGreedLoading}
         coins={coins}
       />
+      <WhaleActivityFeedSection />
+      <CorrelationSection />
+      <PortfolioSection />
+      <ScenarioSection />
     </PageTransition>
   )
 }

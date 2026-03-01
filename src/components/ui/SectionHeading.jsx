@@ -18,13 +18,12 @@ export default function SectionHeading({ title, subtitle, glowColor = 'cyan' }) 
       viewport={{ once: true }}
     >
       <h2
-        className={`font-heading font-bold ${glowClass} mb-6`}
-        style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}
+        className={`font-heading typo-h1 font-bold ${glowClass} mb-6`}
       >
         {title}
       </h2>
       {subtitle && (
-        <p className="text-text-secondary text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
+        <p className="text-text-secondary typo-body-lg max-w-3xl mx-auto">
           {subtitle}
         </p>
       )}
